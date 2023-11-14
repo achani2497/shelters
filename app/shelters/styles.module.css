@@ -1,0 +1,13 @@
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 2px solid greenyellow;
+    padding: 1rem;
+}

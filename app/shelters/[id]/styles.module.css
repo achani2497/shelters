@@ -1,0 +1,42 @@
+.shelterLayoutContainer {
+    display: block;
+    margin-top: 5rem;
+}
+
+.debtBanner {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    gap: .5rem;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    background-color: white;
+    color: red;
+    height: fit-content;
+    padding: 1rem;
+    text-align: center;
+    align-items: center;
+}
+
+.debtButton {
+    width: fit-content;
+    border: 2px solid black;
+    padding: .2rem 1rem;
+    border-radius: 30px;
+    color: black;
+    transition: all .5s ease-in-out;
+}
+
+.debtButton:hover {
+    border-color: black;
+    background: black;
+    color: white;
+}
+
+.dogsCardContainer {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 25rem));
+    justify-content: space-evenly;
+}

@@ -1,0 +1,18 @@
+.descriptionCard {
+    display: flex;
+    gap: 1rem;
+    border: 2px solid greenyellow;
+    padding: 1rem;
+}
+
+.descriptionCardImageSection {
+    width: 250px !important;
+    height: 250px !important;
+}
+
+.descriptionCardTextSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
