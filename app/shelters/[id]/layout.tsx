@@ -11,7 +11,7 @@ export default function ShelterLayout({ children }: any) {
     return (
         <div className={style.shelterLayoutContainer}>
             {
-                debt > 75000 ? (
+                debt > 25000 ? (
                     <div className={style.debtBanner}>
                         <span><b>Nuestra deuda asciende hasta los ${debtWithCommas()} </b></span>
                         <button className={style.debtButton}>¡Ayudanos!</button>

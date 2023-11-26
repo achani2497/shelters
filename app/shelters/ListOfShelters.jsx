@@ -1,30 +1,19 @@
 import style from './styles.module.css'
 import { DescriptionCard } from '../components/DescriptionCard/DescriptionCard';
+import { supabase } from '@/lib/initSupabase';
 
-const fetchShelters = () => {
-    return fetch('https://jsonplaceholder.typicode.com/posts').then(res => res.json())
+const fetchShelters = async () => {
+    const { data, error } = await supabase.from("shelter").select();
+    if (data) {
+        return data
+    } else {
+        console.log(error)
+        return []
+    }
 }
 
 export async function ListOfShelters() {
     const shelters = await fetchShelters();
-    // const usuarios = [
-    //     {
-    //         id: 1,
-    //         name: "Alejandro",
-    //         age: 25
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Luna",
-    //         age: 61
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "Daisy",
-    //         age: 75
-    //     },
-    //     ...users
-    // ]
     return (
         <ul className={style.cardsContainer}>
             {shelters.slice(0, 5).map(shelter => {
@@ -32,8 +21,8 @@ export async function ListOfShelters() {
                     <li>
                         <DescriptionCard
                             photoUrl='https://picsum.photos/200/200'
-                            title={shelter.title}
-                            description={shelter.body}
+                            title={shelter.name}
+                            description={shelter.description}
                             buttonText="Ir al perfil del refugio"
                             buttonUrl={`shelters/${shelter.id}`}
                         />

@@ -1,5 +1,4 @@
 .shelterLayoutContainer {
-    display: block;
     margin-top: 5rem;
 }
 
@@ -34,9 +33,36 @@
     color: white;
 }
 
-.dogsCardContainer {
+.cardContainer {
     display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 25rem));
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 30rem));
     justify-content: space-evenly;
+}
+
+.shelterContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+}
+
+.dogsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.personalContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2rem;
+    gap: 1rem;
+}
+
+.personalListContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
