@@ -1,0 +1,14 @@
+.debtButton {
+    width: fit-content;
+    border: 2px solid white;
+    padding: .2rem 1rem;
+    border-radius: 30px;
+    color: white;
+    transition: all .5s ease-in-out;
+}
+
+.debtButton:hover {
+    border-color: black;
+    background: black;
+    color: white;
+}

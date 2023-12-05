@@ -1,6 +1,7 @@
-import style from './PageTitle.module.css'
+'use client'
+import { Text } from '@chakra-ui/react'
 export function PageTitle({ title }: { title: string }) {
     return (
-        <h1 className={style.pageTitle}>{title} </h1>
+        <Text as="h2" fontSize={'4xl'} fontWeight={'bold'} color={'black'}>{title} </Text>
     )
 }

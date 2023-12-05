@@ -1,9 +1,14 @@
+'use client'
+
 import { supabase } from "@/lib/initSupabase"
 import { DogCard } from "./components/DogCard"
 import { PersonalCard } from "./components/PersonalCard"
 import style from './styles.module.css'
 import { PageTitle } from "@/app/components/PageTitle/PageTitle"
+import { Flex } from "@chakra-ui/react"
+import { DebtBanner } from "./components/DebtBanner/DebtBanner"
 
+import { useEffect, useState } from "react"
 
 function fetch(table, shelterId) {
     return supabase.from(table).select().eq('shelter_id', shelterId)
@@ -30,14 +35,49 @@ async function personalFetch(shelterId) {
 
 }
 
-export default async function Page({ params }) {
+export default function Page({ params }) {
 
-    const pichichos = await pichichosFetch(params['id'])
-    const personal = await personalFetch(params['id'])
+    const [pichichos, setPichichos] = useState([])
+    const [staff, setStaff] = useState([])
+    const [debt, setDebt] = useState()
+
+    useEffect(() => {
+        async function fetchShelterData() {
+            const { data, error } = await supabase.from('shelter').select(`
+            debt,
+            dog (
+                name,
+                weight,
+                age,
+                photo_url,
+                description
+            ),
+            staff (
+                name,
+                mail,
+                phone,
+                photo_url
+            )
+        `).eq('id', params['id']).single()
+            return data
+        }
+
+        fetchShelterData().then(data => {
+            setPichichos(data.dog)
+            setStaff(data.staff)
+            setDebt(data.debt)
+        }).catch(error => {
+            console.log(error)
+        })
+
+    }, [])
 
     return (
-        <div className={style.shelterContainer}>
-            <div className={style.dogsContainer}>
+        <div className={style.shelterContainer} style={{ marginTop: debt > 0 ? '7rem' : '0' }}>
+            {
+                debt > 0 ? <DebtBanner debt={debt}></DebtBanner> : ''
+            }
+            <Flex flexDirection={'column'} padding={'0 2rem'}>
                 <PageTitle title="Estos son nuestros amiguitos" />
                 <ul className={style.cardContainer}>
                     {
@@ -50,12 +90,12 @@ export default async function Page({ params }) {
                         })
                     }
                 </ul>
-            </div>
-            <div className={style.personalContainer}>
+            </Flex>
+            <Flex flexDirection={'column'} padding={'0 2rem'}>
                 <PageTitle title="Nuestro personal" />
                 <ul className={style.cardContainer}>
                     {
-                        personal.map(person => {
+                        staff.map(person => {
                             return (
                                 <PersonalCard
                                     person={person}
@@ -64,7 +104,7 @@ export default async function Page({ params }) {
                         })
                     }
                 </ul>
-            </div>
+            </Flex>
         </div>
     )
 }

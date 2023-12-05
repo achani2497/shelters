@@ -1,9 +1,22 @@
-import style from './RedirectButton.module.css'
-import Link from "next/link"
+import { Box, useColorModeValue } from '@chakra-ui/react'
 
-export function RedirectButton({ label, url }) {
+export function RedirectButton({ label, url }: { label: string, url: string }) {
 
     return (
-        <Link href={url} className={style.redirectButton}>{label}</Link>
+        <Box as="a"
+            px={4}
+            py={2}
+            rounded={'lg'}
+            border={'2px solid gray'}
+            width={'fit-content'}
+            fontSize={'xl'}
+            _hover={{
+                textDecoration: 'none',
+                bg: useColorModeValue('gray.200', 'gray.700'),
+                transition: 'all .4s ease-in-out'
+            }}
+            href={url}>
+            {label}
+        </Box>
     )
 }
