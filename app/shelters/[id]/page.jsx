@@ -7,6 +7,7 @@ import style from './styles.module.css'
 import { PageTitle } from "@/app/components/PageTitle/PageTitle"
 import { Flex } from "@chakra-ui/react"
 import { DebtBanner } from "./components/DebtBanner/DebtBanner"
+import { Skeleton } from "@chakra-ui/react"
 
 import { useEffect, useState } from "react"
 
@@ -20,28 +21,34 @@ export default function Page({ params }) {
     const [staff, setStaff] = useState([])
     const [debt, setDebt] = useState()
     const [shelterId, setShelterId] = useState()
+    const [shelterName, setShelterName] = useState()
+
+    const [isLoaded, setIsLoaded] = useState(false)
 
     useEffect(() => {
         async function fetchShelterData() {
             const { data, error } = await supabase.from('shelter').select(`
-            id,
-            debt,
-            dog (
+                id,
                 name,
-                weight,
-                age,
-                photo_url,
-                description,
-                shelter_enter_date
-            ),
-            staff (
-                name,
-                mail,
-                phone,
-                photo_url
-            )
-        `).eq('id', params['id']).single()
-            console.log(data)
+                debt,
+                dog (
+                    name,
+                    weight,
+                    age,
+                    photo_url,
+                    description,
+                    shelter_enter_date
+                ),
+                staff (
+                    name,
+                    mail,
+                    phone,
+                    photo_url
+                )
+            `).eq('id', params['id']).single()
+            if(error){
+             return error   
+            }
             return data
         }
 
@@ -50,6 +57,9 @@ export default function Page({ params }) {
             setStaff(data.staff)
             setDebt(data.debt)
             setShelterId(data.id)
+            setShelterName(data.name)
+
+            setIsLoaded(true)
         }).catch(error => {
             console.log(error)
         })
@@ -61,24 +71,28 @@ export default function Page({ params }) {
             {
                 debt > 0 ? <DebtBanner debtProp={debt} shelterId={shelterId}></DebtBanner> : ''
             }
-            <Flex flexDirection={'column'} padding={'0 2rem'}>
-                <PageTitle title="Estos son nuestros amiguitos" />
-                <DogsList pichichos={pichichos}/>
-            </Flex>
-            <Flex flexDirection={'column'} padding={'0 2rem'}>
-                <PageTitle title="Nuestro personal" />
-                <ul className={style.cardContainer}>
-                    {
-                        staff.map(person => {
-                            return (
-                                <PersonalCard
-                                    person={person}
-                                />
-                            )
-                        })
-                    }
-                </ul>
-            </Flex>
+                <Flex flexDirection={'column'} padding={'0 2rem'}>
+                    <Skeleton height={'auto'} isLoaded={isLoaded}>
+                        <PageTitle title={`Estos son los amiguitos que tenemos en ${shelterName}`} />
+                        <DogsList pichichos={pichichos}/>
+                    </Skeleton>
+                </Flex>
+                <Flex flexDirection={'column'} padding={'0 2rem'}>
+                    <Skeleton height={'auto'} isLoaded={isLoaded}>
+                            <PageTitle title="Nuestro personal" />
+                            <ul className={style.cardContainer}>
+                                {
+                                    staff.map(person => {
+                                        return (
+                                            <PersonalCard
+                                                person={person}
+                                            />
+                                        )
+                                    })
+                                }
+                            </ul>
+                    </Skeleton>
+                </Flex>
         </div>
     )
 }
