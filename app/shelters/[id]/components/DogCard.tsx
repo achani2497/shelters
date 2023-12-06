@@ -6,26 +6,44 @@ import {
     Heading,
     Text,
     Button,
-    useColorModeValue,
     Flex,
 } from '@chakra-ui/react'
+import { useState } from 'react'
 
-interface IDogCard {
+export interface IDog {
     name: string
     weight: number
     age: number
     photo_url: string
     description: string
+    shelter_enter_date: string
 }
 
-export function DogCard({ dog }: { dog: IDogCard }) {
+function daysInShelter(arriveDate: string){
+    const arrivalDate = new Date(arriveDate);
+    const currentDate = new Date();
+
+    const diffInMs = currentDate.getTime() - arrivalDate.getTime();
+
+    const msInADay = 1000 * 60 * 60 * 24; // Milisegundos en un día
+    const diffInDays = diffInMs / msInADay;
+
+    const days = Math.floor(diffInDays);
+
+    return days
+}
+
+export function DogCard({ dog }: { dog: IDog }) {
+
+    const [showFullDescription, setShowFullDescription] = useState(false)
+    const words = dog.description.split(' ');
+    const lengthBreakpoint = 40
+    const displayText = showFullDescription ? dog.description : words.slice(0, lengthBreakpoint).join(' ') + '...';
 
     return (
         <Center>
             <Box
-                w={'full'}
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                bg={useColorModeValue('white', 'gray.900')}
+                w={'inherit'}
                 boxShadow={'2xl'}
                 rounded={'md'}
                 p={6}
@@ -39,14 +57,23 @@ export function DogCard({ dog }: { dog: IDogCard }) {
                 </Box>
                 <Flex flexDirection={'column'} gap={4}>
                     <Heading
-                        // eslint-disable-next-line react-hooks/rules-of-hooks
-                        color={useColorModeValue('gray.700', 'white')}
                         fontSize={'3xl'}
                         fontFamily={'body'}>
                         {dog.name}
                     </Heading>
+                    <Box>
+                        <p><b>Peso:</b> {dog.weight} kg</p>
+                        <p><b>Edad:</b> {dog.age} años</p>
+                        <p>Lleva <b>{daysInShelter(dog.shelter_enter_date)} días</b> con nosotros</p>
+                    </Box>
                     <Text color={'gray.700'} fontSize={'xl'}>
-                        {dog.description}
+                        {displayText + ' '}
+                        {
+                            dog.description.length > lengthBreakpoint ? 
+                            (<Button colorScheme='teal' variant={'link'} onClick={() => setShowFullDescription(!showFullDescription)}>
+                                {showFullDescription?'Leer menos':'Leer más'}
+                            </Button>) : null
+                        }
                     </Text>
                     <Button
                         px={4}
@@ -64,7 +91,8 @@ export function DogCard({ dog }: { dog: IDogCard }) {
                             bg: 'black',
                             color: 'white'
                         }}>
-                        Lo quiero adoptar ❤️!                    </Button>
+                        Lo quiero adoptar ❤️!
+                    </Button>
                 </Flex>
             </Box>
         </Center>

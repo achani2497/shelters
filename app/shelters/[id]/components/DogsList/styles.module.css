@@ -1,0 +1,7 @@
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 23rem));
+    justify-content: space-around;
+    gap: 1rem;
+    align-items: start;
+}
