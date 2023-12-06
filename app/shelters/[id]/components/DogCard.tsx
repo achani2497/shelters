@@ -64,7 +64,7 @@ export function DogCard({ dog }: { dog: IDogCard }) {
                             bg: 'black',
                             color: 'white'
                         }}>
-                        Lo quiero adoptar asd ❤️!                    </Button>
+                        Lo quiero adoptar ❤️!                    </Button>
                 </Flex>
             </Box>
         </Center>

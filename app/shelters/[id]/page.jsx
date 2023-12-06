@@ -40,10 +40,12 @@ export default function Page({ params }) {
     const [pichichos, setPichichos] = useState([])
     const [staff, setStaff] = useState([])
     const [debt, setDebt] = useState()
+    const [shelterId, setShelterId] = useState()
 
     useEffect(() => {
         async function fetchShelterData() {
             const { data, error } = await supabase.from('shelter').select(`
+            id,
             debt,
             dog (
                 name,
@@ -66,6 +68,7 @@ export default function Page({ params }) {
             setPichichos(data.dog)
             setStaff(data.staff)
             setDebt(data.debt)
+            setShelterId(data.id)
         }).catch(error => {
             console.log(error)
         })
@@ -75,7 +78,7 @@ export default function Page({ params }) {
     return (
         <div className={style.shelterContainer} style={{ marginTop: debt > 0 ? '7rem' : '0' }}>
             {
-                debt > 0 ? <DebtBanner debt={debt}></DebtBanner> : ''
+                debt > 0 ? <DebtBanner debtProp={debt} shelterId={shelterId}></DebtBanner> : ''
             }
             <Flex flexDirection={'column'} padding={'0 2rem'}>
                 <PageTitle title="Estos son nuestros amiguitos" />
