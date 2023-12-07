@@ -14,7 +14,7 @@ export function Comments({ commentsProp, shelterId }: { commentsProp: IComment[]
     const shelterService = new ShelterService()
 
     const [comments, setComments] = useState(commentsProp || [])
-    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm({
+    const { handleSubmit, register, formState: { errors, isSubmitting }, reset } = useForm({
         defaultValues: {
             name: '',
             comment: ''
@@ -37,6 +37,7 @@ export function Comments({ commentsProp, shelterId }: { commentsProp: IComment[]
             .then(() => {
                 toast.update(notif, { render: 'Muchas Gracias por dejarnos tu comentario ❤️', type: "success", isLoading: false })
                 setComments([...comments, { person_name: values.name, comment: values.comment }])
+                reset()
             })
             .catch(e => {
                 console.log(e)
