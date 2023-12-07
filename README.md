@@ -18,14 +18,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## TODOs
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+[ ] Caja de comentarios en la pagina de cada refugio
+[ ] Agregar un boton para anotarse como voluntario en el refugio
+[ ] Agregar seccion de mascotas pérdidas
+[ ] Las personas tienen que poder crear un posteo sobre su perro con foto, nombre, ultimo lugar donde se lo vió / perdió y telefono de contacto
+[ ] Se tiene que poder filtrar por zona
+[ ] En el home agregar una galeria de casos de Exito de adopcion con testimonios y alguna foto
+[ ] Agenda de Eventos: Crea un calendario de eventos como ferias de adopción, clínicas veterinarias móviles, campañas de vacunación, entre otros. Permite a los usuarios registrarse o confirmar su asistencia a estos eventos.
+[ ] Implementar Sistema de Rescate de Animales: Permite a los usuarios reportar animales en situaciones de peligro o abuso. Implementa un formulario para registrar estos reportes y un proceso para que el refugio pueda intervenir o coordinar rescates.
 
 ## Deploy on Vercel
 

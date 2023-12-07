@@ -11,9 +11,46 @@ import { Skeleton } from "@chakra-ui/react"
 
 import { useEffect, useState } from "react"
 
-function fetch(table, shelterId) {
-    return supabase.from(table).select().eq('shelter_id', shelterId)
+// TODO: Mover a un archivo aparte esta estructura y el custom hook
+const shelterRelations = {
+    'dog': 'dog (name,weight,age,photo_url,description,shelter_enter_date)',
+    'staff': 'staff (name,mail,phone,photo_url)',
+    'comment': 'comment (person_name, comment, comment_date)'
 }
+
+function useFetchFromShelter({id, fields}) {
+
+    const [shelterData, setShelterData] = useState()
+    const [finishedFetching, setFinishFetching] = useState(false)
+
+    const joinString = fields.map(field => shelterRelations[field]).join(', ')
+
+    useEffect(() => {
+        async function fetchShelterData() {
+            const { data, error } = await supabase.from('shelter').select(`
+                id,
+                name,
+                debt,
+                ${joinString}
+            `).eq('id', id).single()
+            if(error){
+             return error   
+            }
+            return data
+        }
+
+        fetchShelterData().then(data => {
+            setShelterData(data)
+            setFinishFetching(true)
+        }).catch(error => {
+            console.log(error)
+        })
+
+    }, [])
+
+    return [shelterData, finishedFetching]
+}
+// Fin TODO
 
 export default function Page({ params }) {
 
@@ -25,46 +62,18 @@ export default function Page({ params }) {
 
     const [isLoaded, setIsLoaded] = useState(false)
 
+    const [shelterData, finishedFetching] = useFetchFromShelter({id: params['id'], fields: ['comment', 'dog', 'staff']})
+
     useEffect(() => {
-        async function fetchShelterData() {
-            const { data, error } = await supabase.from('shelter').select(`
-                id,
-                name,
-                debt,
-                dog (
-                    name,
-                    weight,
-                    age,
-                    photo_url,
-                    description,
-                    shelter_enter_date
-                ),
-                staff (
-                    name,
-                    mail,
-                    phone,
-                    photo_url
-                )
-            `).eq('id', params['id']).single()
-            if(error){
-             return error   
-            }
-            return data
+        if(shelterData){
+            setPichichos(shelterData.dog)
+            setStaff(shelterData.staff)
+            setDebt(shelterData.debt)
+            setShelterId(shelterData.id)
+            setShelterName(shelterData.name)
+            setIsLoaded(finishedFetching)
         }
-
-        fetchShelterData().then(data => {
-            setPichichos(data.dog)
-            setStaff(data.staff)
-            setDebt(data.debt)
-            setShelterId(data.id)
-            setShelterName(data.name)
-
-            setIsLoaded(true)
-        }).catch(error => {
-            console.log(error)
-        })
-
-    }, [])
+    }, [shelterData])
 
     return (
         <div className={style.shelterContainer} style={{ marginTop: debt > 0 ? '2rem' : '0' }}>
