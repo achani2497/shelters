@@ -28,7 +28,7 @@ export function PersonalCard({ person }: { person: IPersonalCard }) {
                 gap={4}
                 w={'full'}
                 bg={useColorModeValue('white', 'gray.800')}
-                boxShadow={'2xl'}
+                boxShadow={'xl'}
                 rounded={'md'}
                 overflow={'hidden'}>
                 <Flex justify={'center'}>

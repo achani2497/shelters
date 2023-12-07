@@ -19,7 +19,7 @@ export interface IDog {
     shelter_enter_date: string
 }
 
-function daysInShelter(arriveDate: string){
+function daysInShelter(arriveDate: string) {
     const arrivalDate = new Date(arriveDate);
     const currentDate = new Date();
 
@@ -44,7 +44,7 @@ export function DogCard({ dog }: { dog: IDog }) {
         <Center>
             <Box
                 w={'inherit'}
-                boxShadow={'2xl'}
+                boxShadow={'xl'}
                 rounded={'md'}
                 p={6}
                 overflow={'hidden'}>
@@ -69,10 +69,10 @@ export function DogCard({ dog }: { dog: IDog }) {
                     <Text color={'gray.700'} fontSize={'xl'}>
                         {displayText + ' '}
                         {
-                            dog.description.length > lengthBreakpoint ? 
-                            (<Button colorScheme='teal' variant={'link'} onClick={() => setShowFullDescription(!showFullDescription)}>
-                                {showFullDescription?'Leer menos':'Leer más'}
-                            </Button>) : null
+                            dog.description.length > lengthBreakpoint ?
+                                (<Button colorScheme='teal' variant={'link'} onClick={() => setShowFullDescription(!showFullDescription)}>
+                                    {showFullDescription ? 'Leer menos' : 'Leer más'}
+                                </Button>) : null
                         }
                     </Text>
                     <Button

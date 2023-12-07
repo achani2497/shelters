@@ -20,15 +20,14 @@ import {
     FormErrorMessage,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import { supabase } from '@/lib/initSupabase'
-import {ToastContainer, toast} from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import { ShelterService } from '@/app/services/shelterService'
 
 export function DebtBanner({ debtProp, shelterId }: { debtProp: number, shelterId: number }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const {handleSubmit, register, formState:{errors, isSubmitting}} = useForm();
+    const { handleSubmit, register, formState: { errors, isSubmitting } } = useForm();
     const shelterService = new ShelterService()
 
     function debtWithCommas() {
@@ -45,16 +44,16 @@ export function DebtBanner({ debtProp, shelterId }: { debtProp: number, shelterI
             draggable: true,
             progress: undefined,
             theme: "colored",
-            })
-
-        shelterService.update('shelter', 'debt', Math.max(0, debtProp-values.amount), shelterId)
-        .then(() =>
-            toast.update(notif, {render: 'Donación realizada! Muchas Gracias por tu ayuda ❤️', type: "success", isLoading: false})
-        )
-        .catch(e => {
-            console.log(e)
-            toast.update(notif, {render: 'No se pudo realizar la donación, por favor intenta mas tarde', type: "error", isLoading: false})
         })
+
+        shelterService.update('shelter', 'debt', Math.max(0, debtProp - values.amount), shelterId)
+            .then(() =>
+                toast.update(notif, { render: 'Donación realizada! Muchas Gracias por tu ayuda ❤️', type: "success", isLoading: false })
+            )
+            .catch(e => {
+                console.log(e)
+                toast.update(notif, { render: 'No se pudo realizar la donación, por favor intenta mas tarde', type: "error", isLoading: false })
+            })
     }
 
 
@@ -75,39 +74,39 @@ export function DebtBanner({ debtProp, shelterId }: { debtProp: number, shelterI
                 <ModalOverlay />
                 <ModalContent>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                    <ModalHeader>Realiza tu donación ❤️🐕</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody pb={6}>
-                        <FormControl isInvalid={!!errors?.amount?.message?.toString()}>
-                            <FormLabel htmlFor='amount'>¿Cuánto queres donar?</FormLabel>
-                            <Input type='number' placeholder='$10, $100, $1000' {
-                                ...register('amount', {
-                                    required: 'Es necesario que ingreses una cantidad',
-                                    valueAsNumber: true,
-                                    min:{
-                                        value:0,
-                                        message:'La cantidad minima es 0'
-                                    }
-                                })
-                            } />
-                            <FormErrorMessage>
-                                { errors?.amount && errors?.amount?.message?.toString()}
-                            </FormErrorMessage>
-                        </FormControl>
-                    </ModalBody>
+                        <ModalHeader>Realiza tu donación ❤️🐕</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody pb={6}>
+                            <FormControl isInvalid={!!errors?.amount?.message?.toString()}>
+                                <FormLabel htmlFor='amount'>¿Cuánto queres donar?</FormLabel>
+                                <Input type='number' placeholder='$10, $100, $1000' {
+                                    ...register('amount', {
+                                        required: 'Es necesario que ingreses una cantidad',
+                                        valueAsNumber: true,
+                                        min: {
+                                            value: 0,
+                                            message: 'La cantidad minima es 0'
+                                        }
+                                    })
+                                } />
+                                <FormErrorMessage>
+                                    {errors?.amount && errors?.amount?.message?.toString()}
+                                </FormErrorMessage>
+                            </FormControl>
+                        </ModalBody>
 
-                    <ModalFooter>
-                        <Flex gap={'1rem'}>
-                            <Button className='bg-purple-500' _hover={{
-                                bg: 'purple',
-                                color: 'white'
-                            }}
-                            color={'white'} type='submit' isLoading={isSubmitting}>
-                                Donar
-                            </Button>
-                            <Button onClick={onClose}>Cancelar</Button>
-                        </Flex>
-                    </ModalFooter>
+                        <ModalFooter>
+                            <Flex gap={'1rem'}>
+                                <Button className='bg-purple-500' _hover={{
+                                    bg: 'purple',
+                                    color: 'white'
+                                }}
+                                    color={'white'} type='submit' isLoading={isSubmitting}>
+                                    Donar
+                                </Button>
+                                <Button onClick={onClose}>Cancelar</Button>
+                            </Flex>
+                        </ModalFooter>
                     </form>
                 </ModalContent>
             </Modal>
