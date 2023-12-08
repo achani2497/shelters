@@ -27,9 +27,6 @@ const NavLink = ({ url, label }: { url: string, label: string }) => {
             display={'flex'}
             justifyContent={'center'}
             alignItems={'center'}
-            // _hover={{
-            //     borderBottom: '3px solid violet'
-            // }}
             href={url}>
             {label}
         </Box>

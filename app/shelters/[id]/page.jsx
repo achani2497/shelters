@@ -49,7 +49,7 @@ export default function Page({ params }) {
       )}
       {/* Lista de Perros */}
       <Skeleton height={"auto"} isLoaded={isLoaded} fadeDuration={1}>
-        <Flex flexDirection={"column"} padding={"0 2rem"}>
+        <Flex flexDirection={"column"}>
           <PageTitle
             title={`Estos son los amiguitos que tenemos en ${shelterName}`}
           />
@@ -59,11 +59,11 @@ export default function Page({ params }) {
 
       {/* Lista de Personal */}
       <Skeleton height={"auto"} isLoaded={isLoaded} fadeDuration={1}>
-        <Flex flexDirection={"column"} padding={"0 2rem"}>
+        <Flex flexDirection={"column"}>
           <PageTitle title="Nuestro personal" />
           <ul className={style.cardContainer}>
             {staff.map((person) => {
-              return <PersonalCard person={person} />;
+              return <PersonalCard key={person.id} person={person} />;
             })}
           </ul>
         </Flex>

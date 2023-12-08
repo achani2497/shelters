@@ -1,34 +1,38 @@
+'use client'
 import style from './styles.module.css'
 import { DescriptionCard } from '../components/DescriptionCard/DescriptionCard';
-import { supabase } from '@/lib/initSupabase';
+import { useEffect, useState } from 'react';
+import { Skeleton } from "@chakra-ui/react";
+import { useFetchShelters } from '../hooks/shelter';
 
-const fetchShelters = async () => {
-    const { data, error } = await supabase.from("shelter").select();
-    if (data) {
-        return data
-    } else {
-        console.log(error)
-        return []
-    }
-}
+export function ListOfShelters() {
 
-export async function ListOfShelters() {
-    const shelters = await fetchShelters();
+    const [isLoaded, setIsLoaded] = useState(false)
+    const [shelters, finishedFetching] = useFetchShelters()
+
+    useEffect(() => {
+        if (shelters) {
+            setIsLoaded(finishedFetching);
+        }
+    }, [shelters])
+
     return (
         <ul className={style.cardsContainer}>
-            {shelters.slice(0, 5).map(shelter => {
-                return (
-                    <li>
-                        <DescriptionCard
-                            photoUrl='https://picsum.photos/200/200'
-                            title={shelter.name}
-                            description={shelter.description}
-                            buttonText="Ir al perfil del refugio"
-                            buttonUrl={`shelters/${shelter.id}`}
-                        />
-                    </li>
-                )
-            })}
+            <Skeleton height={"auto"} isLoaded={isLoaded} fadeDuration={1}>
+                {shelters.slice(0, 5).map(shelter => {
+                    return (
+                        <li key={shelter.id}>
+                            <DescriptionCard
+                                photoUrl='https://picsum.photos/200/200'
+                                title={shelter.name}
+                                description={shelter.description}
+                                buttonText="Ir al perfil del refugio"
+                                buttonUrl={`shelters/${shelter.id}`}
+                            />
+                        </li>
+                    )
+                })}
+            </Skeleton>
         </ul>
     )
 

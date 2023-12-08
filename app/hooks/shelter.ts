@@ -1,30 +1,16 @@
-import { supabase } from "@/lib/initSupabase"
 import { useEffect, useState } from "react"
+import { ShelterService } from "../services/shelterService"
 
-const shelterRelations = {
-    'dog': 'dog (name,weight,age,photo_url,description,shelter_enter_date)',
-    'staff': 'staff (name,mail,phone,photo_url)',
-    'comment': 'comment (person_name, comment, comment_date)'
-}
+
 
 export function useFetchFromShelter({ id, fields }: { id: number, fields: string[] }) {
 
     const [shelterData, setShelterData] = useState()
     const [finishedFetching, setFinishFetching] = useState(false)
 
-    const joinString = fields.map(field => shelterRelations[field]).join(', ')
-
     useEffect(() => {
         async function fetchShelterData() {
-            const { data, error } = await supabase.from('shelter').select(`
-                id,
-                name,
-                debt,
-                ${joinString}
-            `).eq('id', id).single()
-            if (error) {
-                return error
-            }
+            const { data, error } = await ShelterService.fetchShelterData(id, fields)
             return data
         }
 
@@ -38,4 +24,28 @@ export function useFetchFromShelter({ id, fields }: { id: number, fields: string
     }, [])
 
     return [shelterData, finishedFetching]
+}
+
+export function useFetchShelters() {
+
+    const [shelters, setShelters] = useState([])
+    const [finishedFetching, setFinishFetching] = useState(false)
+
+    useEffect(() => {
+        async function fetchShelters() {
+            const { data, error } = await ShelterService.fetchShelters()
+            if (error) {
+                return error
+            }
+            return data
+        }
+
+        fetchShelters().then((data: any) => {
+            setShelters(data)
+            setFinishFetching(true)
+        })
+            .catch(e => console.log(e))
+    }, [])
+
+    return [shelters, finishedFetching]
 }

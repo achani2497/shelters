@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 
 interface IComment {
+    id: number
     person_name: string
     comment: string
 }
@@ -36,7 +37,8 @@ export function Comments({ commentsProp, shelterId }: { commentsProp: IComment[]
         shelterService.createComment(values.name, values.comment, shelterId)
             .then(() => {
                 toast.update(notif, { render: 'Muchas Gracias por dejarnos tu comentario ❤️', type: "success", isLoading: false })
-                setComments([...comments, { person_name: values.name, comment: values.comment }])
+                const lastComment = comments[comments.length - 1]
+                setComments([...comments, { id: lastComment!.id + 1, person_name: values.name, comment: values.comment }])
                 reset()
             })
             .catch(e => {
@@ -48,7 +50,7 @@ export function Comments({ commentsProp, shelterId }: { commentsProp: IComment[]
 
     return (
 
-        <Flex flexDirection={"column"} gap={'1rem'} padding={"0 2rem"}>
+        <Flex flexDirection={"column"} gap={'1rem'}>
             <PageTitle title="Comentarios sobre nuestro trabajo" />
             <Flex flexDirection={'column'} gap={'1rem'}>
                 {comments.map((comment) => {

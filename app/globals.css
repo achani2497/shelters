@@ -30,6 +30,6 @@ body {
 
 .container {
   min-width: 100%;
-  padding: 5rem 8rem 3rem;
+  padding: 5rem 10% 3rem;
   position: relative;
 }
