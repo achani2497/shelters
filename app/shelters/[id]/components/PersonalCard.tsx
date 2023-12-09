@@ -11,14 +11,14 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react'
 
-interface IPersonalCard {
+type PersonalCard = {
     name: string
     mail: string
     phone: string
     photo_url: string
 }
 
-export function PersonalCard({ person }: { person: IPersonalCard }) {
+export function PersonalCard({ person }: { person: PersonalCard }) {
 
     return (
         <Center py={6}>

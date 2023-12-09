@@ -20,7 +20,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 ## TODOs
 
-[ ] Caja de comentarios en la pagina de cada refugio
+[x] Caja de comentarios en la pagina de cada refugio
 [ ] Agregar un boton para anotarse como voluntario en el refugio
 [ ] Agregar seccion de mascotas pérdidas
 [ ] Las personas tienen que poder crear un posteo sobre su perro con foto, nombre, ultimo lugar donde se lo vió / perdió y telefono de contacto

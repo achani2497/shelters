@@ -1,9 +1,9 @@
 import { supabase } from "@/lib/initSupabase";
 
-const shelterRelations = {
-    'dog': 'dog (name,weight,age,photo_url,description,shelter_enter_date)',
-    'staff': 'staff (name,mail,phone,photo_url)',
-    'comment': 'comment (person_name, comment, comment_date)'
+const SHELTER_RELATIONS = {
+    dog: 'dog (name,weight,age,photo_url,description,shelter_enter_date)',
+    staff: 'staff (name,mail,phone,photo_url)',
+    comment: 'comment (person_name, comment, comment_date)'
 }
 export class ShelterService {
 
@@ -12,7 +12,7 @@ export class ShelterService {
     }
 
     static async fetchShelterData(shelterId: number, fields: string[]) {
-        const joinString = fields.map(field => shelterRelations[field]).join(', ')
+        const joinString = fields.map(field => SHELTER_RELATIONS[field]).join(', ')
 
         return await supabase.from('shelter').select(`
                 id,

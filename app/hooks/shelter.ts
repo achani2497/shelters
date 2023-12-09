@@ -48,4 +48,4 @@ export function useFetchShelters() {
     }, [])
 
     return [shelters, finishedFetching]
-}
+}   

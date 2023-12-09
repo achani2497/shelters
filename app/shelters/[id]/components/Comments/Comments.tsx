@@ -5,16 +5,16 @@ import { ShelterService } from "@/app/services/shelterService";
 import { toast } from "react-toastify";
 import { useState } from "react";
 
-interface IComment {
+type Comment = {
     id: number
     person_name: string
     comment: string
 }
 
-export function Comments({ commentsProp, shelterId }: { commentsProp: IComment[], shelterId: number }) {
+export function Comments({ initialComments, shelterId }: { initialComments: Comment[], shelterId: number }) {
     const shelterService = new ShelterService()
 
-    const [comments, setComments] = useState(commentsProp || [])
+    const [comments, setComments] = useState(initialComments || [])
     const { handleSubmit, register, formState: { errors, isSubmitting }, reset } = useForm({
         defaultValues: {
             name: '',
@@ -53,9 +53,9 @@ export function Comments({ commentsProp, shelterId }: { commentsProp: IComment[]
         <Flex flexDirection={"column"} gap={'1rem'}>
             <PageTitle title="Comentarios sobre nuestro trabajo" />
             <Flex flexDirection={'column'} gap={'1rem'}>
-                {comments.map((comment) => {
+                {comments.map((comment, index) => {
                     return (
-                        <Card padding={'1rem'} variant={'filled'}>
+                        <Card key={index} padding={'1rem'} variant={'filled'}>
                             <Flex flexDirection={'column'}>
                                 <Text as='b'>{comment.person_name} </Text>
                                 <Text fontSize="lg">{comment.comment}</Text>

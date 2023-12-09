@@ -43,7 +43,7 @@ export default function Page({ params }) {
       style={{ marginTop: debt > 0 ? "2rem" : "0" }}
     >
       {debt > 0 ? (
-        <DebtBanner debtProp={debt} shelterId={shelterId}></DebtBanner>
+        <DebtBanner initialDebt={debt} shelterId={shelterId}></DebtBanner>
       ) : (
         ""
       )}
@@ -60,10 +60,10 @@ export default function Page({ params }) {
       {/* Lista de Personal */}
       <Skeleton height={"auto"} isLoaded={isLoaded} fadeDuration={1}>
         <Flex flexDirection={"column"}>
-          <PageTitle title="Nuestro personal" />
+          <PageTitle title="Nuestros ayudantes" />
           <ul className={style.cardContainer}>
-            {staff.map((person) => {
-              return <PersonalCard key={person.id} person={person} />;
+            {staff.map((person, index) => {
+              return <PersonalCard key={index} person={person} />;
             })}
           </ul>
         </Flex>
@@ -71,7 +71,7 @@ export default function Page({ params }) {
 
       {/* Lista de comentarios y caja de comentarios */}
       <Skeleton height={"auto"} isLoaded={isLoaded} fadeDuration={1}>
-        <Comments commentsProp={comments} shelterId={shelterId} />
+        <Comments initialComments={comments} shelterId={shelterId} />
       </Skeleton>
     </div>
   );
