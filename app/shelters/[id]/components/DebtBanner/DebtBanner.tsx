@@ -10,6 +10,8 @@ import {
     FormLabel,
     Heading,
     Input,
+    InputGroup,
+    InputLeftAddon,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -83,16 +85,19 @@ export function DebtBanner({ initialDebt, shelterId }: { initialDebt: number, sh
                         <ModalBody pb={6}>
                             <FormControl isInvalid={!!errors?.amount?.message?.toString()}>
                                 <FormLabel htmlFor='amount'>¿Cuánto queres donar?</FormLabel>
-                                <Input type='number' placeholder='$10, $100, $1000' {
-                                    ...register('amount', {
-                                        required: 'Es necesario que ingreses una cantidad',
-                                        valueAsNumber: true,
-                                        min: {
-                                            value: 0,
-                                            message: 'La cantidad minima es 0'
-                                        }
-                                    })
-                                } />
+                                <InputGroup>
+                                    <InputLeftAddon children='$' />
+                                    <Input type='number' placeholder='$10, $100, $1000' {
+                                        ...register('amount', {
+                                            required: 'Es necesario que ingreses una cantidad',
+                                            valueAsNumber: true,
+                                            min: {
+                                                value: 0,
+                                                message: 'La cantidad minima es 0'
+                                            }
+                                        })
+                                    } />
+                                </InputGroup>
                                 <FormErrorMessage>
                                     {errors?.amount && errors?.amount?.message?.toString()}
                                 </FormErrorMessage>

@@ -1,6 +1,7 @@
 'use client'
 import { supabase } from "@/lib/initSupabase";
-import { Box, Button, Flex, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Skeleton, useDisclosure } from "@chakra-ui/react";
+import { SearchIcon } from '@chakra-ui/icons';
+import { Box, Button, Flex, Input, InputGroup, InputLeftElement, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Skeleton, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,12 +9,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { DateInput, TextInput } from "../components/FormInput/FormInput";
 import { PageTitle } from "../components/PageTitle/PageTitle";
 import { MissingService } from "../services/missingService";
-import { DogCard } from "../shelters/[id]/components/DogCard";
+import { Dog, DogCard } from "../shelters/[id]/components/DogCard";
 import style from './missing.module.css';
 
 export default function Page() {
 
     const [missingDogs, setMissingDogs] = useState([])
+    const [filteredDogs, setFilteredDogs] = useState([])
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [finishedFetching, setFinishFetching] = useState(false)
     const { handleSubmit, register, reset, formState: { errors, isSubmitting } } = useForm({
@@ -29,6 +31,7 @@ export default function Page() {
     useEffect(() => {
         fetchMissingDogs().then((data: any) => {
             setMissingDogs(data)
+            setFilteredDogs(data)
             setFinishFetching(true)
         }).catch()
 
@@ -85,6 +88,12 @@ export default function Page() {
 
     }
 
+    function search(e: any) {
+        const keyWord = e.target.value.trim().toLowerCase()
+        const dogs = missingDogs.filter((dog: Dog) => dog.name.toLocaleLowerCase().includes(keyWord))
+        setFilteredDogs(dogs)
+    }
+
     return (
         <>
             <Flex justifyContent={'space-between'} w={'full'}>
@@ -98,10 +107,16 @@ export default function Page() {
                     Reportar perro perdido
                 </Button>
             </Flex>
+            <InputGroup my={'1rem'}>
+                <InputLeftElement pointerEvents='none'>
+                    <SearchIcon color='gray.300' />
+                </InputLeftElement>
+                <Input placeholder="Busca por nombre" onChange={search}></Input>
+            </InputGroup>
             <Skeleton height={"auto"} isLoaded={finishedFetching}>
                 <ul className={style.cardContainer}>
                     {
-                        missingDogs.map((dog: any, index) => {
+                        filteredDogs.map((dog: any, index) => {
                             return (
                                 <DogCard key={index} dog={dog}>
                                     <Box>
@@ -132,6 +147,7 @@ export default function Page() {
                     }
                 </ul>
             </Skeleton>
+            {/* Form para reportar perro perdido */}
             <Modal
                 isOpen={isOpen}
                 onClose={onClose}

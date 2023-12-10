@@ -1,10 +1,10 @@
 'use client'
-import Link from "next/link"
 import {
     Box,
     Flex,
     HStack,
 } from '@chakra-ui/react'
+import Link from "next/link"
 
 const links = [
     {
@@ -12,8 +12,8 @@ const links = [
         route: '/shelters'
     },
     {
-        label: 'Mascotas',
-        route: '/'
+        label: 'Perros Perdidos',
+        route: '/missing'
     }
 ]
 
