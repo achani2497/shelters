@@ -1,14 +1,14 @@
 'use client'
-import style from './styles.module.css'
-import { DescriptionCard } from '../components/DescriptionCard/DescriptionCard';
-import { useEffect, useState } from 'react';
 import { Skeleton } from "@chakra-ui/react";
+import { useEffect, useState } from 'react';
+import { DescriptionCard } from '../components/DescriptionCard/DescriptionCard';
 import { useFetchShelters } from '../hooks/shelter';
+import style from './styles.module.css';
 
 export function ListOfShelters() {
 
     const [isLoaded, setIsLoaded] = useState(false)
-    const [shelters, finishedFetching] = useFetchShelters()
+    const { shelters, finishedFetching } = useFetchShelters()
 
     useEffect(() => {
         if (shelters) {

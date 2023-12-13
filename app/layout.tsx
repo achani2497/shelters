@@ -1,6 +1,6 @@
-import './globals.css'
 import { Inter } from 'next/font/google'
 import { Navigation } from './components/Navigation/Navigation'
+import './globals.css'
 import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -23,6 +23,7 @@ export default function RootLayout({
                     <div className={'container'}>
                         {children}
                     </div>
+                    {/* TODO: Agregar footer que muestre mail de contacto, pais de origen, all rights reserved, logos de algunas redes sociales y las secciones disponibles. */}
                 </Providers>
             </body>
         </html>

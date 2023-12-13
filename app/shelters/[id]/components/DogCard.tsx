@@ -29,7 +29,7 @@ export function DogCard({ children, dog }: { children: any, dog: Dog }) {
                 overflow={'hidden'}>
                 <Box h={'210px'} bg={'gray.100'} pos={'relative'} rounded={'md'} mb={4} overflow={'hidden'}>
                     <Image
-                        src={dog.photo_url}
+                        src={`/images/${dog.photo_url}`}
                         fill
                         alt={dog.name + ' photo'}
                     />

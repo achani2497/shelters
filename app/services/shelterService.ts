@@ -7,19 +7,33 @@ const SHELTER_RELATIONS = {
 }
 export class ShelterService {
 
-    static async fetchShelters() {
-        return await supabase.from("shelter").select();
+    static async fetchShelters(includes: string[] = []) {
+        const shelters = supabase.from("shelter")
+        if (includes.length) {
+            const tables = includes.map(field => SHELTER_RELATIONS[field]).join(', ')
+
+            return await shelters.select(`id, name, debt, description, ${tables}`).order('id', { ascending: true })
+        }
+        return await shelters.select();
     }
 
     static async fetchShelterData(shelterId: number, fields: string[]) {
         const joinString = fields.map(field => SHELTER_RELATIONS[field]).join(', ')
+        let query = supabase.from('shelter').select(`
+        id,
+        name,
+        debt,
+        ${joinString}
+        `).eq('id', shelterId)
 
-        return await supabase.from('shelter').select(`
-                id,
-                name,
-                debt,
-                ${joinString}
-                `).eq('id', shelterId).single()
+        if (fields.includes('dog')) {
+            query = query.is('dog.adoption_date', null)
+        }
+        return await query.single()
+    }
+
+    static async fetchAdoptedDogs() {
+        return await supabase.from('adopted').select('person_name, dog (name, photo_url)')
     }
 
     async update(tableName: string, fieldToUpdate: string, newValue: any, entityId: number) {
