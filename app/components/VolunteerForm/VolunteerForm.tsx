@@ -7,14 +7,14 @@ import { SheltieButton } from '../Button/Button';
 import { TextInput } from '../FormInput/FormInput';
 import styles from './form.module.css';
 
-export function VolunteerForm({ shelters, embeded = false }: { shelters: any, embeded?: boolean }) {
+export function VolunteerForm({ shelters = [], shelter_id = '', embeded = false }: { shelters?: any, shelter_id?: number | string, embeded?: boolean }) {
     const { handleSubmit, register, formState: { errors, isSubmitting }, reset } = useForm({
         defaultValues: {
             name: '',
             age: '',
             phone: '',
             mail: '',
-            shelter: ''
+            shelter: shelter_id
         }
     });
 
@@ -97,20 +97,24 @@ export function VolunteerForm({ shelters, embeded = false }: { shelters: any, em
                             },
                         }
                     } register={register} errorObj={errors?.mail} />
-                    <FormControl isInvalid={!!errors?.shelter?.message?.toString()}>
-                        <FormLabel htmlFor={'shelter'} fontWeight={'bold'}>¿A qué refugio queres ayudar?</FormLabel>
-                        <Select variant='flushed' size={'lg'} placeholder='Selecciona uno de nuestros refugios' {...register('shelter', { required: 'Especifica a qué refugio queres ayudar' })}>
-                            {
-                                shelters.map((shelter: any) => (
-                                    <option key={shelter.id} value={shelter.id}>{shelter.name}</option>
-                                ))
-                            }
-                        </Select>
-                        <FormErrorMessage>
-                            {errors && errors?.shelter?.message?.toString()}
-                        </FormErrorMessage>
-                    </FormControl>
-                    <SheltieButton isSubmitting={isSubmitting} type='submit' label={'Anotarme'} ></SheltieButton>
+                    {
+                        !shelter_id ? (
+                            <FormControl isInvalid={!!errors?.shelter?.message?.toString()}>
+                                <FormLabel htmlFor={'shelter'} fontWeight={'bold'}>¿A qué refugio queres ayudar?</FormLabel>
+                                <Select variant='flushed' size={'lg'} placeholder='Selecciona uno de nuestros refugios' {...register('shelter', { required: 'Especifica a qué refugio queres ayudar' })}>
+                                    {
+                                        shelters.map((shelter: any) => (
+                                            <option key={shelter.id} value={shelter.id}>{shelter.name}</option>
+                                        ))
+                                    }
+                                </Select>
+                                <FormErrorMessage>
+                                    {errors && errors?.shelter?.message?.toString()}
+                                </FormErrorMessage>
+                            </FormControl>
+                        ) : ''
+                    }
+                    <SheltieButton isSubmitting={isSubmitting} type='submit' label={'Anotarme'} />
                 </Flex>
             </form>
             <ToastContainer />

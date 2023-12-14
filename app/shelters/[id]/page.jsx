@@ -1,14 +1,16 @@
 "use client";
 
+import { PageTitle } from "@/app/components/PageTitle/PageTitle";
+import { VolunteerForm } from '@/app/components/VolunteerForm/VolunteerForm';
+import { useFetchFromShelter } from "@/app/hooks/shelter";
+import { AddIcon } from '@chakra-ui/icons';
+import { Button, Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, Skeleton, Text, useDisclosure } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Comments } from "./components/Comments/Comments";
+import { DebtBanner } from "./components/DebtBanner/DebtBanner";
 import { DogsList } from "./components/DogsList/DogList";
 import { PersonalCard } from "./components/PersonalCard";
 import style from "./styles.module.css";
-import { PageTitle } from "@/app/components/PageTitle/PageTitle";
-import { DebtBanner } from "./components/DebtBanner/DebtBanner";
-import { Skeleton, Flex } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useFetchFromShelter } from "@/app/hooks/shelter";
-import { Comments } from "./components/Comments/Comments";
 
 export default function Page({ params }) {
   const [pichichos, setPichichos] = useState([]);
@@ -17,6 +19,7 @@ export default function Page({ params }) {
   const [shelterId, setShelterId] = useState();
   const [shelterName, setShelterName] = useState();
   const [comments, setComments] = useState([]);
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -65,14 +68,30 @@ export default function Page({ params }) {
             {staff.map((person, index) => {
               return <PersonalCard key={index} person={person} />;
             })}
+            <Button boxShadow={'xl'} height={'415px'} padding={'1rem'} rounded={'md'} onClick={onOpen}>
+              <Flex flexDirection={'column'} gap={'1rem'} justifyContent={'center'} alignItems={'center'} height={'100%'} width={'100%'} rounded={'md'} bgColor={'rgba(255,255, 255, .7)'} style={{ boxShadow: 'inset 0 0 40px rgba(0,0,0,.3)' }}>
+                <AddIcon boxSize={10} />
+                <Text fontWeight={'bold'}>Anotate como voluntario!</Text>
+              </Flex>
+            </Button>
           </ul>
         </Flex>
+        <Modal
+          isOpen={isOpen}
+          onClose={onClose}
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton />
+            <VolunteerForm shelter_id={shelterId} embeded={true} />
+          </ModalContent>
+        </Modal>
       </Skeleton>
 
       {/* Lista de comentarios y caja de comentarios */}
       <Skeleton height={"auto"} isLoaded={isLoaded} fadeDuration={1}>
         <Comments initialComments={comments} shelterId={shelterId} />
       </Skeleton>
-    </div>
+    </div >
   );
 }
