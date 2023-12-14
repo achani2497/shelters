@@ -1,8 +1,19 @@
 import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react";
 
-export function TextInput({ label, fieldName, type = 'text', placeholder = '', validations = {}, register, errorObj }: any) {
+type CustomInput = {
+    label: string
+    fieldName: string
+    type?: string
+    placeholder?: string
+    validations?: any
+    register: any
+    errorObj: any
+    className?: string
+}
+
+export function TextInput({ label, fieldName, type = 'text', placeholder = '', validations = {}, register, errorObj, className = '' }: CustomInput) {
     return (
-        <FormControl isInvalid={!!errorObj?.message?.toString()}>
+        <FormControl className={className} isInvalid={!!errorObj?.message?.toString()}>
             <FormLabel htmlFor={fieldName} fontWeight={'bold'}>{label}</FormLabel>
             <Input type={type} placeholder={placeholder} {
                 ...register(fieldName, validations)
@@ -14,7 +25,7 @@ export function TextInput({ label, fieldName, type = 'text', placeholder = '', v
     )
 }
 
-export function DateInput({ label, fieldName, validations = {}, register, errorObj }: any) {
+export function DateInput({ label, fieldName, validations = {}, register, errorObj }: CustomInput) {
     return (
         <FormControl isInvalid={!!errorObj?.message?.toString()}>
             <FormLabel htmlFor={fieldName} fontWeight={'bold'}>{label}</FormLabel>

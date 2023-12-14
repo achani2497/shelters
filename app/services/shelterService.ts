@@ -33,7 +33,7 @@ export class ShelterService {
     }
 
     static async fetchAdoptedDogs() {
-        return await supabase.from('adopted').select('person_name, dog (name, photo_url)')
+        return await supabase.from('adopted').select('id, person_name, dog (name, photo_url)')
     }
 
     async update(tableName: string, fieldToUpdate: string, newValue: any, entityId: number) {
@@ -42,5 +42,14 @@ export class ShelterService {
 
     async createComment(nombre: string, comment: string, shelterId: number) {
         return await supabase.from('comment').insert([{ person_name: nombre, comment, shelter_id: shelterId }]).select()
+    }
+
+    static async createStaff(name: string, mail: string, phone: string, shelter_id: number) {
+        return await supabase.from('staff').insert([{
+            name,
+            mail,
+            phone,
+            shelter_id
+        }])
     }
 }

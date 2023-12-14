@@ -77,7 +77,7 @@ export default function Page() {
                 reset()
                 fetchMissingDogs().then((data: any) => {
                     setMissingDogs(data)
-                }).catch()
+                }).catch(e => console.log(e))
                 onClose()
             }
             )

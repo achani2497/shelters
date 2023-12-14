@@ -9,7 +9,7 @@ export function ImagesCardLayout({ images, shelterId, shelterName }: { images: s
     }
 
     return (
-        <Flex flexDirection={'column'} boxShadow={{ base: 'xl', lg: '2xl' }} gap='1rem' padding={'1.5rem'} borderRadius="xl">
+        <Flex flexDirection={'column'} boxShadow={{ base: 'xl', md: 'xl', lg: '2xl' }} gap='1rem' padding={'1.5rem'} borderRadius="xl">
             <Flex width={{ base: '320px', md: '45vw', lg: '34.5vw', xl: '35vw' }} minW={{ lg: '430px', xl: '450px' }} maxW={'660px'} height={'350px'} gap={'1rem'} flexDirection={{ base: 'column', lg: 'row' }} >
                 <Flex
                     flex={2}
