@@ -1,6 +1,16 @@
 import { Button } from '@chakra-ui/react'
 
-export function SheltieButton({ label, outline = false, type = 'button', isSubmitting = false, action = () => { } }: { label: string, outline?: boolean, type?: 'button' | 'submit' | 'reset' | undefined, isSubmitting?: boolean, action?: any }) {
+type SheltieButton = {
+    label: string
+    outline?: boolean
+    type?: 'button' | 'submit' | 'reset' | undefined
+    alignMiddle?: boolean
+    isSubmitting?: boolean
+    fitContent?: boolean
+    action?: any
+}
+
+export function SheltieButton({ label, outline = false, type = 'button', alignMiddle = true, isSubmitting = false, fitContent = false, action = () => { } }: SheltieButton) {
     return (
         <Button variant={'outline'} transitionDuration={'.7s'}
             isLoading={isSubmitting}
@@ -11,11 +21,11 @@ export function SheltieButton({ label, outline = false, type = 'button', isSubmi
                 border: 'purple'
             }}
             color={outline ? '#A855F7' : 'white'}
-            mt={'1rem'}
-            mx={'auto'}
+            mx={alignMiddle ? 'auto' : ''}
             className={outline ? '' : 'bg-purple-500'}
             border={outline ? '2px solid #A855F7' : ''}
-            width={{ base: '100%', md: '50%', lg: '30%' }}
+            width={fitContent ? 'fit-content' : { base: '100%', md: '50%', lg: '30%' }}
+            minW={'fit-content'}
             onClick={action}
             type={type}
         >

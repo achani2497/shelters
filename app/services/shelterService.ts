@@ -14,7 +14,7 @@ export class ShelterService {
 
             return await shelters.select(`id, name, debt, description, ${tables}`).order('id', { ascending: true })
         }
-        return await shelters.select();
+        return await shelters.select().order('id', { ascending: true });
     }
 
     static async fetchShelterData(shelterId: number, fields: string[]) {

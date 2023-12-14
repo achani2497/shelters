@@ -1,9 +1,10 @@
+import { SheltieButton } from "@/app/components/Button/Button";
 import { PageTitle } from "@/app/components/PageTitle/PageTitle";
-import { Text, Flex, Card, Textarea, FormControl, Button, FormLabel, Input, FormErrorMessage } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
 import { ShelterService } from "@/app/services/shelterService";
-import { toast } from "react-toastify";
+import { Card, Flex, FormControl, FormErrorMessage, FormLabel, Input, Text, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 type Comment = {
     id: number
@@ -95,13 +96,7 @@ export function Comments({ initialComments, shelterId }: { initialComments: Comm
                                 {errors?.comment && errors?.comment?.message?.toString()}
                             </FormErrorMessage>
                         </FormControl>
-                        <Button className='bg-purple-500' width={'fit-content'} mt={'1rem'} _hover={{
-                            bg: 'purple',
-                            color: 'white'
-                        }}
-                            color={'white'} type='submit' isLoading={isSubmitting}>
-                            Enviar
-                        </Button>
+                        <SheltieButton alignMiddle={false} fitContent label="Enviar" type={'submit'} />
                     </Flex>
                 </form>
             </Card>

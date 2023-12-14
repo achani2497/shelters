@@ -6,10 +6,11 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { SheltieButton } from "../components/Button/Button";
 import { DateInput, TextInput } from "../components/FormInput/FormInput";
 import { PageTitle } from "../components/PageTitle/PageTitle";
 import { MissingService } from "../services/missingService";
-import { Dog, DogCard } from "../shelters/[id]/components/DogCard";
+import { Dog, DogCard } from "../shelters/[id]/components/DogCard/DogCard";
 import style from './missing.module.css';
 
 export default function Page() {
@@ -96,16 +97,10 @@ export default function Page() {
 
     return (
         <>
-            <Flex justifyContent={'space-between'} w={'full'}>
+            <Flex alignItems={'center'} justifyContent={'space-between'} w={'full'}>
                 <PageTitle title="Estos amiguitos estan perdidos" />
-                <Button className='bg-purple-500' _hover={{
-                    bg: 'purple',
-                    color: 'white'
-                }}
-                    color={'white'}
-                    onClick={onOpen}>
-                    Reportar perro perdido
-                </Button>
+                <SheltieButton fitContent alignMiddle={false} label={'Reportar perro perdido'} />
+
             </Flex>
             <InputGroup my={'1rem'}>
                 <InputLeftElement pointerEvents='none'>
@@ -113,7 +108,7 @@ export default function Page() {
                 </InputLeftElement>
                 <Input placeholder="Busca por nombre" onChange={search}></Input>
             </InputGroup>
-            <Skeleton height={"auto"} isLoaded={finishedFetching}>
+            {finishedFetching ? (
                 <ul className={style.cardContainer}>
                     {
                         filteredDogs.map((dog: any, index) => {
@@ -124,29 +119,14 @@ export default function Page() {
                                         <p><b>Teléfono de contacto:</b> {dog.phone}</p>
                                         <p>Lleva <b>{daysLost(dog.missing_date)} días</b> perdido</p>
                                     </Box>
-                                    <Button
-                                        px={4}
-                                        fontSize={'md'}
-                                        rounded={'full'}
-                                        color={'black'}
-                                        boxShadow={
-                                            '0px 1px 25px -5px rgb(20 20 20 / 48%), 0 10px 10px -5px rgb(30 30 30 / 43%)'
-                                        }
-                                        _hover={{
-                                            bg: 'black',
-                                            color: 'white'
-                                        }}
-                                        _focus={{
-                                            bg: 'black',
-                                            color: 'white'
-                                        }}>
-                                        Lo encontré!
-                                    </Button>
+                                    <SheltieButton label={'Lo encontré!'} />
                                 </DogCard>)
                         })
                     }
                 </ul>
-            </Skeleton>
+
+            ) : (<Skeleton height={"400px"} fadeDuration={1} />)}
+
             {/* Form para reportar perro perdido */}
             <Modal
                 isOpen={isOpen}
@@ -239,13 +219,7 @@ export default function Page() {
                         {/* Botones */}
                         <ModalFooter>
                             <Flex gap={'1rem'}>
-                                <Button className='bg-purple-500' _hover={{
-                                    bg: 'purple',
-                                    color: 'white'
-                                }}
-                                    color={'white'} type='submit' isLoading={isSubmitting}>
-                                    Reportar
-                                </Button>
+                                <SheltieButton label={'Reportar'} isSubmitting={isSubmitting} />
                                 <Button onClick={onClose}>Cancelar</Button>
                             </Flex>
                         </ModalFooter>

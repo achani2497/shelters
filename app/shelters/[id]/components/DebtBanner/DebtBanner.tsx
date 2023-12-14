@@ -1,5 +1,6 @@
 'use client'
 
+import { SheltieButton } from '@/app/components/Button/Button'
 import { ShelterService } from '@/app/services/shelterService'
 import {
     Box,
@@ -106,13 +107,7 @@ export function DebtBanner({ initialDebt, shelterId }: { initialDebt: number, sh
 
                         <ModalFooter>
                             <Flex gap={'1rem'}>
-                                <Button className='bg-purple-500' _hover={{
-                                    bg: 'purple',
-                                    color: 'white'
-                                }}
-                                    color={'white'} type='submit' isLoading={isSubmitting}>
-                                    Donar
-                                </Button>
+                                <SheltieButton label={"Donar"} type={'submit'} isSubmitting={isSubmitting} />
                                 <Button onClick={onClose}>Cancelar</Button>
                             </Flex>
                         </ModalFooter>

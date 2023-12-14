@@ -1,6 +1,7 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { SheltieButton } from "../Button/Button";
 
 export function ImagesCardLayout({ images, shelterId, shelterName }: { images: string[], shelterId: number, shelterName: string }) {
     const { push } = useRouter()
@@ -42,14 +43,7 @@ export function ImagesCardLayout({ images, shelterId, shelterName }: { images: s
 
                 </Flex>
             </Flex>
-            <Button className='bg-purple-500' _hover={{
-                bg: 'purple',
-                color: 'white'
-            }}
-                color={'white'}
-                onClick={goToShelter}>
-                {`Visitar el refugio "${shelterName}"`}
-            </Button>
+            <SheltieButton label={`Visitar el refugio "${shelterName}"`} action={goToShelter} />
         </Flex>
     )
 }

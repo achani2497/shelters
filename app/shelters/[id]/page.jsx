@@ -47,9 +47,7 @@ export default function Page({ params }) {
     >
       {debt > 0 ? (
         <DebtBanner initialDebt={debt} shelterId={shelterId}></DebtBanner>
-      ) : (
-        ""
-      )}
+      ) : null}
       {/* Lista de Perros */}
       <Skeleton height={"auto"} isLoaded={isLoaded} fadeDuration={1}>
         <Flex flexDirection={"column"}>

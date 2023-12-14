@@ -1,6 +1,7 @@
+import { SheltieButton } from "@/app/components/Button/Button";
 import { Box, Button, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import { Dog, DogCard } from "../DogCard";
+import { Dog, DogCard } from "../DogCard/DogCard";
 import style from './styles.module.css';
 
 function daysInShelter(arriveDate: string) {
@@ -50,24 +51,7 @@ export function DogsList({ pichichos }: { pichichos: Dog[] }) {
                                         </Button>) : null
                                 }
                             </Text>
-                            <Button
-                                px={4}
-                                fontSize={'md'}
-                                rounded={'full'}
-                                color={'black'}
-                                boxShadow={
-                                    '0px 1px 25px -5px rgb(20 20 20 / 48%), 0 10px 10px -5px rgb(30 30 30 / 43%)'
-                                }
-                                _hover={{
-                                    bg: 'black',
-                                    color: 'white'
-                                }}
-                                _focus={{
-                                    bg: 'black',
-                                    color: 'white'
-                                }}>
-                                Lo quiero adoptar ❤️!
-                            </Button>
+                            <SheltieButton label={'Lo quiero adoptar ❤️!'} />
                         </DogCard>
                     )
                 })

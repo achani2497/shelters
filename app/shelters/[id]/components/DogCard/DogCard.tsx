@@ -6,6 +6,7 @@ import {
     Heading
 } from '@chakra-ui/react'
 import Image from 'next/image'
+import styles from './dogCard.module.css'
 
 export type Dog = {
     name: string
@@ -31,6 +32,7 @@ export function DogCard({ children, dog }: { children: any, dog: Dog }) {
                     <Image
                         src={`/images/${dog.photo_url}`}
                         fill
+                        className={styles.dogPhoto}
                         alt={dog.name + ' photo'}
                     />
                 </Box>
