@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { ShelterService } from "../services/shelterService"
+import { ShelterService, shelterRelations } from "../services/shelterService"
 
 
 
-export function useFetchFromShelter({ id, fields }: { id: number, fields: string[] }) {
+export function useFetchFromShelter({ id, fields }: { id: number, fields: shelterRelations[] }) {
 
     const [shelterData, setShelterData] = useState()
     const [finishedFetching, setFinishFetching] = useState(false)
@@ -37,7 +37,7 @@ export function useFetchFromShelter({ id, fields }: { id: number, fields: string
     return { shelterData, finishedFetching } as any
 }
 
-export function useFetchShelters(includes: string[] = []) {
+export function useFetchShelters(includes: shelterRelations[] = []) {
 
     const [shelters, setShelters] = useState([])
     const [finishedFetching, setFinishFetching] = useState(false)

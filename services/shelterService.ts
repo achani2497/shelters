@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/initSupabase";
 
-type shelterRelations = 'dog' | 'staff' | 'comment'
+export type shelterRelations = 'dog' | 'staff' | 'comment'
 
 const SHELTER_RELATIONS = {
     dog: 'dog (name,weight,age,photo_url,description,shelter_enter_date)',
