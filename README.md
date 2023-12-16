@@ -39,6 +39,11 @@ Ultimos detalles
 [x] Fixear las fotos de ImagesCardLayout
 [ ] Agregar funcionalidad al boton Lo Encontré en Missing
 
+Urgente
+[ ] Fixear el comportamiento de las cards de /shelters/[id]
+[ ] Cambiar las fotos de los refugios en /shelters
+[x] Crear un logo para poner en el nav y como favicon
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

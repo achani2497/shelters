@@ -28,8 +28,11 @@ export default function Home() {
                 <Box width={'100%'} position={'relative'} height={'90vh'} rounded={'2xl'} overflow={'hidden'}>
                     <Image src={'/images/3.jpg'} className='landingContainer' fill alt='dog image' priority />
                     <Flex padding={'4rem'} flexDirection={'column'} justifyContent={'flex-end'} position={'absolute'} width={'100%'} bottom={0} height={'50%'} gap={'1rem'} className='slideText'>
-                        <Text fontSize={'6xl'} fontWeight={'bold'}>Sheltie</Text>
-                        <Text fontSize={'3xl'}>Cambia dos vidas con una sola adopción. ¡Sé parte de esta hermosa historia!</Text>
+                        {/* <Text fontSize={'6xl'} fontWeight={'bold'}>Sheltie</Text> */}
+                        <Box width={200} height={100} position={'relative'}>
+                            <Image src={'/logo-black.svg'} alt='sheltie logo' fill style={{ objectFit: 'cover', scale: '2' }} />
+                        </Box>
+                        <Text fontSize={'3xl'} fontWeight={'bold'}>Cambia dos vidas con una sola adopción. ¡Sé parte de esta hermosa historia!</Text>
                     </Flex>
                 </Box>
                 <Flex gap={'1rem'} flexDirection={'column'}>

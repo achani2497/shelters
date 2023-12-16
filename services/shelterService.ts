@@ -14,7 +14,7 @@ export class ShelterService {
         if (includes.length) {
             const tables = includes.map(field => SHELTER_RELATIONS[field]).join(', ')
 
-            return await shelters.select(`id, name, debt, description, ${tables}`).order('id', { ascending: true })
+            return await shelters.select(`id, name, debt, description, photo_url, ${tables}`).order('id', { ascending: true })
         }
         return await shelters.select().order('id', { ascending: true });
     }

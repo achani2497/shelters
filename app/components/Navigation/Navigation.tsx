@@ -4,6 +4,7 @@ import {
     Flex,
     HStack,
 } from '@chakra-ui/react'
+import Image from 'next/image'
 import Link from "next/link"
 
 const links = [
@@ -44,7 +45,9 @@ export function Navigation() {
         <>
             <Box className='bg-purple-500 text-white' height={'4rem'} px={'10%'} boxShadow={'lg'} position={'fixed'} top={'0'} zIndex={'99'} width={'full'}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'} width={'100%'}>
-                    <Link href='/' style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>Sheltie</Link>
+                    <Link href='/' style={{ position: 'relative', width: '200px', height: '100%' }}>
+                        <Image src={'/logo.svg'} alt='sheltie logo' fill style={{ objectFit: 'cover' }} />
+                    </Link>
                     <HStack as={'nav'} spacing={8} display={'flex'}>
                         {links.map((link) => (
                             <NavLink key={link.label} url={link.route} label={link.label}></NavLink>

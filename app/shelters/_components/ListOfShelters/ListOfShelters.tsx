@@ -24,7 +24,7 @@ export function ListOfShelters() {
                         return (
                             <DescriptionCard
                                 key={shelter.id}
-                                photoUrl='https://picsum.photos/200/200'
+                                photoUrl={`/images/shelters/${shelter.photo_url}`}
                                 title={shelter.name}
                                 description={shelter.description}
                                 buttonText="Ir al perfil del refugio"
