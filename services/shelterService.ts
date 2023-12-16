@@ -1,5 +1,7 @@
 import { supabase } from "@/lib/initSupabase";
 
+type shelterRelations = 'dog' | 'staff' | 'comment'
+
 const SHELTER_RELATIONS = {
     dog: 'dog (name,weight,age,photo_url,description,shelter_enter_date)',
     staff: 'staff (name,mail,phone,photo_url)',
@@ -7,7 +9,7 @@ const SHELTER_RELATIONS = {
 }
 export class ShelterService {
 
-    static async fetchShelters(includes: string[] = []) {
+    static async fetchShelters(includes: shelterRelations[] = []) {
         const shelters = supabase.from("shelter")
         if (includes.length) {
             const tables = includes.map(field => SHELTER_RELATIONS[field]).join(', ')
@@ -17,7 +19,7 @@ export class ShelterService {
         return await shelters.select().order('id', { ascending: true });
     }
 
-    static async fetchShelterData(shelterId: number, fields: string[]) {
+    static async fetchShelterData(shelterId: number, fields: shelterRelations[]) {
         const joinString = fields.map(field => SHELTER_RELATIONS[field]).join(', ')
         let query = supabase.from('shelter').select(`
         id,
