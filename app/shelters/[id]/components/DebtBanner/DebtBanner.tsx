@@ -13,7 +13,6 @@ import {
     Heading,
     Input,
     InputGroup,
-    InputLeftAddon,
     Modal,
     ModalBody,
     ModalCloseButton,
@@ -21,7 +20,7 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
-    useDisclosure,
+    useDisclosure
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -88,7 +87,7 @@ export function DebtBanner({ initialDebt, shelterId }: { initialDebt: number, sh
                             <FormControl isInvalid={!!errors?.amount?.message?.toString()}>
                                 <FormLabel htmlFor='amount'>¿Cuánto queres donar?</FormLabel>
                                 <InputGroup>
-                                    <InputLeftAddon children='$' />
+                                    {/* <InputLeftAddon children='$' /> */}
                                     <Input type='number' placeholder='$10, $100, $1000' {
                                         ...register('amount', Validations['donation'])
                                     } />

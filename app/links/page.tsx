@@ -37,8 +37,8 @@ export default function Page() {
             <PageTitle title="Links que pueden ser útiles" />
             <Grid templateColumns={'repeat(auto-fill, minmax(20rem, 23rem))'} autoRows={'25rem'} justifyContent={{ base: 'center', md: 'space-around' }} gap={'2rem'}>
                 {
-                    links.map(link => (
-                        <Flex gap={'1rem'} flexDirection={'column'} boxShadow={'xl'} width={'100%'} height={'100%'} rounded={'xl'} padding={'2rem'}>
+                    links.map((link, index) => (
+                        <Flex key={index} gap={'1rem'} flexDirection={'column'} boxShadow={'xl'} width={'100%'} height={'100%'} rounded={'xl'} padding={'2rem'}>
                             <Text fontWeight='bold' fontSize={'xl'}>{link.title}</Text>
                             <Text as={'em'}>{link.description} </Text>
                             <Link href={link.url} rel="noopener noreferrer" target="_blank" className={styles.button}

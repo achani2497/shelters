@@ -26,8 +26,8 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 [x] Las personas tienen que poder crear un posteo sobre su perro con foto, nombre, ultimo lugar donde se lo vió / perdió y telefono de contacto
 [x] Agregar un buscador para buscar por nombre de los perros
 [X] En el home agregar una galeria de casos de Exito de adopcion con testimonios y alguna foto
-[ ] Agregar un footer
-[ ] Agregar una pantalla principal en la home
+[x] Agregar un footer
+[x] Agregar una pantalla principal en la home
 [ ] Agenda de Eventos: Crea un calendario de eventos como ferias de adopción, clínicas veterinarias móviles, campañas de vacunación, entre otros. Permite a los usuarios registrarse o confirmar su asistencia a estos eventos.
 [ ] Implementar Sistema de Rescate de Animales: Permite a los usuarios reportar animales en situaciones de peligro o abuso. Implementa un formulario para registrar estos reportes y un proceso para que el refugio pueda intervenir o coordinar rescates.
 
