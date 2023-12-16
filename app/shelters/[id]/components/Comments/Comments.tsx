@@ -1,7 +1,9 @@
-import { SheltieButton } from "@/app/components/Button/Button";
-import { PageTitle } from "@/app/components/PageTitle/PageTitle";
-import { ShelterService } from "@/app/services/shelterService";
-import { Card, Flex, FormControl, FormErrorMessage, FormLabel, Input, Text, Textarea } from "@chakra-ui/react";
+import { SheltieButton } from "@/components/Button/Button";
+import { TextAreaInput, TextInput } from "@/components/FormInput/FormInput";
+import { PageTitle } from "@/components/PageTitle/PageTitle";
+import { ShelterService } from "@/services/shelterService";
+import { Validations } from "@/utils/Validations";
+import { Card, Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -68,34 +70,8 @@ export function Comments({ initialComments, shelterId }: { initialComments: Comm
             <Card padding={'1rem'} boxShadow={'xl'}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Flex flexDirection={'column'} gap={'1rem'}>
-                        <FormControl isInvalid={!!errors?.name?.message?.toString()}>
-                            <FormLabel htmlFor="name" fontWeight={'bold'}>Tu nombre</FormLabel>
-                            <Input type='text' {...register('name', {
-                                required: 'Este campo no puede estar vacío',
-                                maxLength: {
-                                    value: 30,
-                                    message: 'El nombre no puede contener mas de 30 caracteres'
-                                }
-                            })}></Input>
-                            <FormErrorMessage>
-                                {errors?.name && errors?.name?.message?.toString()}
-                            </FormErrorMessage>
-                        </FormControl>
-                        <FormControl isInvalid={!!errors?.comment?.message?.toString()}>
-                            <FormLabel htmlFor='comment' fontWeight={'bold'}>Dejanos tu comentario</FormLabel>
-                            <Textarea placeholder="Tu comentario aqui ..."
-                                {...register('comment', {
-                                    required: 'Este campo no puede estar vacío',
-                                    maxLength: {
-                                        value: 200,
-                                        message: 'El comentario no puede contener mas de 200 caracteres'
-                                    }
-                                })}
-                            ></Textarea>
-                            <FormErrorMessage>
-                                {errors?.comment && errors?.comment?.message?.toString()}
-                            </FormErrorMessage>
-                        </FormControl>
+                        <TextInput label="Tu nombre" fieldName="name" errorObj={errors?.name} validations={Validations['humanName']} register={register} />
+                        <TextAreaInput label="Dejanos tu comentario" errorObj={errors?.comment} register={register} validations={Validations['comment']} fieldName="comment" />
                         <SheltieButton alignMiddle={false} fitContent label="Enviar" type={'submit'} />
                     </Flex>
                 </form>

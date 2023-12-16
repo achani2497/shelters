@@ -1,4 +1,5 @@
-import { ShelterService } from '@/app/services/shelterService';
+import { ShelterService } from '@/services/shelterService';
+import { Validations } from '@/utils/Validations';
 import { Flex, FormControl, FormErrorMessage, FormLabel, Select } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { ToastContainer, toast } from "react-toastify";
@@ -46,57 +47,14 @@ export function VolunteerForm({ shelters = [], shelter_id = '', embeded = false 
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                 <Flex padding={'2rem'} flexDirection={'column'} gap={'1rem'} boxShadow={!embeded ? '2xl' : ''} borderRadius={!embeded ? '2xl' : ''}>
                     <TextInput label='Nombre completo' fieldName='name' placeholder='Nombre completo' validations={
-                        {
-                            required: 'Es necesario que ingreses tu nombre completo',
-                            maxLength: {
-                                value: 50,
-                                message: 'El nombre no puede superar los 50 caractéres'
-                            },
-                            minLength: {
-                                value: 7,
-                                message: 'El nombre debe tener al menos 7 caractéres'
-                            }
-                        }
+                        Validations['humanName']
                     } register={register} errorObj={errors?.name} />
-                    <TextInput label='Edad' type='number' fieldName='age' validations={
-                        {
-                            required: 'Es necesario que ingreses tu edad',
-                            max: {
-                                value: 120,
-                                message: 'Edad inválida'
-                            },
-                            min: {
-                                value: 18,
-                                message: 'Debes tener al menos 18 años para anotarte como voluntario'
-                            }
-                        }
-                    } register={register} errorObj={errors?.age} />
+                    <TextInput label='Edad' type='number' fieldName='age' validations={Validations['age']} register={register} errorObj={errors?.age} />
                     <TextInput label='Telefono' fieldName='phone' placeholder='1122334455' validations={
-                        {
-                            required: 'Es necesario que ingreses tu teléfono de contacto',
-                            maxLength: {
-                                value: 10,
-                                message: 'El teléfono no puede exceder los 10 caractéres'
-                            },
-                            minLength: {
-                                value: 8,
-                                message: 'El teléfono debe tener al menos 8 caratéres'
-                            }
-                        }
+                        Validations['phone']
                     } register={register} errorObj={errors?.phone} />
                     <TextInput label='Mail' fieldName='mail' placeholder='tumail@example.com' validations={
-                        {
-                            required: 'Es necesario que ingreses tu email',
-                            maxLength: {
-                                value: 40,
-                                message: 'El mail no puede exceder los 40 caractéres'
-                            },
-                            pattern: {
-                                value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                                message: 'Email inválido',
-                            },
-                        }
-                    } register={register} errorObj={errors?.mail} />
+                        Validations['mail']} register={register} errorObj={errors?.mail} />
                     {
                         !shelter_id ? (
                             <FormControl isInvalid={!!errors?.shelter?.message?.toString()}>

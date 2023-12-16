@@ -1,8 +1,8 @@
 "use client";
 
-import { PageTitle } from "@/app/components/PageTitle/PageTitle";
-import { VolunteerForm } from '@/app/components/VolunteerForm/VolunteerForm';
-import { useFetchFromShelter } from "@/app/hooks/shelter";
+import { PageTitle } from "@/components/PageTitle/PageTitle";
+import { VolunteerForm } from "@/components/VolunteerForm/VolunteerForm";
+import { useFetchFromShelter } from '@/hooks/shelter';
 import { AddIcon } from '@chakra-ui/icons';
 import { Button, Flex, Modal, ModalCloseButton, ModalContent, ModalOverlay, Skeleton, Text, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import { DogsList } from "./components/DogsList/DogList";
 import { PersonalCard } from "./components/PersonalCard";
 import style from "./styles.module.css";
 
-export default function Page({ params }) {
+export default function Page({ params }: any) {
   const [pichichos, setPichichos] = useState([]);
   const [staff, setStaff] = useState([]);
   const [debt, setDebt] = useState();
@@ -23,7 +23,7 @@ export default function Page({ params }) {
 
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const [shelterData, finishedFetching] = useFetchFromShelter({
+  const { shelterData, finishedFetching } = useFetchFromShelter({
     id: params["id"],
     fields: ["comment", "dog", "staff"],
   });
@@ -43,9 +43,9 @@ export default function Page({ params }) {
   return (
     <div
       className={style.shelterContainer}
-      style={{ marginTop: debt > 0 ? "2rem" : "0" }}
+      style={{ marginTop: debt && debt > 0 ? "2rem" : "0" }}
     >
-      {debt > 0 ? (
+      {debt && debt > 0 ? (
         <DebtBanner initialDebt={debt} shelterId={shelterId}></DebtBanner>
       ) : null}
       {/* Lista de Perros */}

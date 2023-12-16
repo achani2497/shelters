@@ -1,9 +1,9 @@
 'use client'
 import { Flex, Skeleton } from "@chakra-ui/react";
 import { useEffect, useState } from 'react';
-import { DescriptionCard } from '../components/DescriptionCard/DescriptionCard';
-import { useFetchShelters } from '../hooks/shelter';
-import style from './styles.module.css';
+import { DescriptionCard } from '../../../../components/DescriptionCard/DescriptionCard';
+import { useFetchShelters } from '../../../../hooks/shelter';
+import style from './list.module.css';
 
 export function ListOfShelters() {
 
@@ -20,7 +20,7 @@ export function ListOfShelters() {
         <ul className={style.cardsContainer}>
             {
                 isLoaded ? (
-                    shelters.slice(0, 5).map(shelter => {
+                    shelters.slice(0, 5).map((shelter: any) => {
                         return (
                             <DescriptionCard
                                 key={shelter.id}

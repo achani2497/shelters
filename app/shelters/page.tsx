@@ -1,6 +1,6 @@
+import { PageTitle } from '../../components/PageTitle/PageTitle'
 import '../globals.css'
-import { ListOfShelters } from './ListOfShelters.jsx'
-import { PageTitle } from '../components/PageTitle/PageTitle'
+import { ListOfShelters } from './_components/ListOfShelters/ListOfShelters'
 
 export default function Page() {
     return (

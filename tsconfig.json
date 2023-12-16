@@ -34,9 +34,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/shelters/page.jsx",
-    "app/components/DescriptionCard/DescriptionCard.tsx",
-    "app/shelters/[id]/page.jsx",
   ],
   "exclude": [
     "node_modules"

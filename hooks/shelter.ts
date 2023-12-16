@@ -34,7 +34,7 @@ export function useFetchFromShelter({ id, fields }: { id: number, fields: string
 
     }, [])
 
-    return [shelterData, finishedFetching]
+    return { shelterData, finishedFetching } as any
 }
 
 export function useFetchShelters(includes: string[] = []) {

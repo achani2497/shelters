@@ -17,7 +17,7 @@ export function Carousel({ dogs }: any) {
                 {
                     dogs.map((adoptedDog: any, index: number) => {
                         return (
-                            <Flex flexDirection={'column'} key={index} boxShadow={'2xl'} borderRadius={'xl'} position={'relative'} overflow={'hidden'} height={'fit-content'} maxW={500}>
+                            <Flex flexDirection={'column'} key={index} boxShadow={'2xl'} borderRadius={'xl'} position={'relative'} overflow={'hidden'} minHeight={400} w={600}>
                                 <Image src={`/images/${adoptedDog.dog.photo_url}`} width={500} height={300} className={styles.slide} alt='adopted dog' priority />
                                 <Box padding={'1rem'}>
                                     <Text> {`${adoptedDog.person_name} - `}
@@ -31,7 +31,7 @@ export function Carousel({ dogs }: any) {
                 }{
                     dogs.map((adoptedDog: any, index: number) => {
                         return (
-                            <Flex flexDirection={'column'} key={index} boxShadow={'2xl'} borderRadius={'xl'} position={'relative'} overflow={'hidden'} height={'fit-content'} maxW={500}>
+                            <Flex flexDirection={'column'} key={index} boxShadow={'2xl'} borderRadius={'xl'} position={'relative'} overflow={'hidden'} height={'fit-content'} w={600}>
                                 <Image src={`/images/${adoptedDog.dog.photo_url}`} width={500} height={300} className={styles.slide} alt='adopted dog' priority />
                                 <Box padding={'1rem'}>
                                     <Text> {`${adoptedDog.person_name} - `}

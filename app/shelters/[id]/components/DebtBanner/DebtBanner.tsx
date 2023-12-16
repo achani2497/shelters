@@ -1,7 +1,8 @@
 'use client'
 
-import { SheltieButton } from '@/app/components/Button/Button'
-import { ShelterService } from '@/app/services/shelterService'
+import { SheltieButton } from '@/components/Button/Button'
+import { ShelterService } from '@/services/shelterService'
+import { Validations } from '@/utils/Validations'
 import {
     Box,
     Button,
@@ -89,14 +90,7 @@ export function DebtBanner({ initialDebt, shelterId }: { initialDebt: number, sh
                                 <InputGroup>
                                     <InputLeftAddon children='$' />
                                     <Input type='number' placeholder='$10, $100, $1000' {
-                                        ...register('amount', {
-                                            required: 'Es necesario que ingreses una cantidad',
-                                            valueAsNumber: true,
-                                            min: {
-                                                value: 0,
-                                                message: 'La cantidad minima es 0'
-                                            }
-                                        })
+                                        ...register('amount', Validations['donation'])
                                     } />
                                 </InputGroup>
                                 <FormErrorMessage>

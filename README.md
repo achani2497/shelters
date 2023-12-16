@@ -36,7 +36,7 @@ Ultimos detalles
 [X] Mejorar las cards de /shelters y fixear el skeleton. Tambien cambiar el estilo del boton, reemplazar por SheltieButton
 [X] Hacer que las imagenes de las DogCards tengan un objectFit: cover y agregar carga prioritaria
 [x] Fixear las fotos de la seccion Missing y reemplazar por SheltieButton
-[ ] Fixear las fotos de ImagesCardLayout
+[x] Fixear las fotos de ImagesCardLayout
 [ ] Agregar funcionalidad al boton Lo Encontré en Missing
 
 ## Deploy on Vercel

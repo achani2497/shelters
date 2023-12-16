@@ -33,3 +33,15 @@ body {
   padding: 5rem 10% 3rem;
   position: relative;
 }
+
+.landingContainer{
+  object-fit: cover;
+}
+
+.slideText{
+  background: linear-gradient(to top, 
+    rgba(255,255,255,.9) 0%, 
+    rgba(255,255,255,.5) 60%, 
+    rgba(255,255,255,.3) 80%, 
+    rgba(255,255,255,0) 100%);
+}

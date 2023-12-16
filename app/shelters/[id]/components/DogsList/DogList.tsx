@@ -1,22 +1,9 @@
-import { SheltieButton } from "@/app/components/Button/Button";
+import { SheltieButton } from "@/components/Button/Button";
+import { daysPassed } from "@/utils/Functions";
 import { Box, Button, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { Dog, DogCard } from "../DogCard/DogCard";
 import style from './styles.module.css';
-
-function daysInShelter(arriveDate: string) {
-    const arrivalDate = new Date(arriveDate);
-    const currentDate = new Date();
-
-    const diffInMs = currentDate.getTime() - arrivalDate.getTime();
-
-    const msInADay = 1000 * 60 * 60 * 24; // Milisegundos en un día
-    const diffInDays = diffInMs / msInADay;
-
-    const days = Math.floor(diffInDays);
-
-    return days
-}
 
 function displayText(description: string, showFullDescription: boolean, lengthBreakpoint: number) {
     const words = description.split(' ');
@@ -40,7 +27,7 @@ export function DogsList({ pichichos }: { pichichos: Dog[] }) {
                             <Box>
                                 <p><b>Peso:</b> {dog.weight} kg</p>
                                 <p><b>Edad:</b> {dog.age} años</p>
-                                <p>Lleva <b>{daysInShelter(dog.shelter_enter_date)} días</b> con nosotros</p>
+                                <p>Lleva <b>{daysPassed(dog.shelter_enter_date)} días</b> con nosotros</p>
                             </Box>
                             <Text color={'gray.700'} fontSize={'xl'}>
                                 {displayText(dog.description, showFullDescription, lengthBreakpoint) + ' '}

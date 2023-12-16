@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google'
+import { Footer } from './components/Footer/Footer'
 import { Navigation } from './components/Navigation/Navigation'
 import './globals.css'
 import { Providers } from './providers'
@@ -17,15 +18,19 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={inter.className} style={{
+                display: 'flex',
+                flexDirection: 'column', minHeight: '100vh'
+            }}>
                 <Providers>
                     <Navigation />
                     <div className={'container'}>
                         {children}
                     </div>
+                    <Footer />
                     {/* TODO: Agregar footer que muestre mail de contacto, pais de origen, all rights reserved, logos de algunas redes sociales y las secciones disponibles. */}
                 </Providers>
             </body>
-        </html>
+        </html >
     )
 }
