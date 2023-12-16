@@ -2,6 +2,8 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 import styles from './Carousel.module.css'
 
+type adoptionQuotesT = 1 | 2 | 3 | 4 | 5
+
 const adoptionQuotes = {
     1: "Estoy emocionado por los días llenos de aventuras que nos esperan juntos!",
     2: "¡Su llegada ha transformado nuestra casa en un hogar! Estoy muy contenta de haberlo adoptado.",
@@ -22,7 +24,7 @@ export function Carousel({ dogs }: any) {
                                 <Box padding={'1rem'}>
                                     <Text> {`${adoptedDog.person_name} - `}
                                         <Text className={styles.slideText} as='em' fontSize={'md'} fontWeight={'bold'} align={'justify'} py={'1rem'} bottom={0} width={'100%'}>
-                                            {`"${adoptionQuotes[adoptedDog.id]}"`}
+                                            {`"${adoptionQuotes[(adoptedDog.id) as adoptionQuotesT]}"`}
                                         </Text>
                                     </Text>
                                 </Box>
@@ -36,7 +38,7 @@ export function Carousel({ dogs }: any) {
                                 <Box padding={'1rem'}>
                                     <Text> {`${adoptedDog.person_name} - `}
                                         <Text className={styles.slideText} as='em' fontSize={'md'} fontWeight={'bold'} align={'justify'} py={'1rem'} bottom={0} width={'100%'}>
-                                            {`"${adoptionQuotes[adoptedDog.id]}"`}
+                                            {`"${adoptionQuotes[(adoptedDog.id) as adoptionQuotesT]}"`}
                                         </Text>
                                     </Text>
                                 </Box>
