@@ -45,7 +45,7 @@ export default function Page({ params }: any) {
       className={style.shelterContainer}
       style={{ marginTop: debt && debt > 0 ? "2rem" : "0" }}
     >
-      {debt && debt > 0 ? (
+      {debt && debt > 0 && shelterId !== undefined ? (
         <DebtBanner initialDebt={debt} shelterId={shelterId}></DebtBanner>
       ) : null}
       {/* Lista de Perros */}
@@ -87,9 +87,14 @@ export default function Page({ params }: any) {
       </Skeleton>
 
       {/* Lista de comentarios y caja de comentarios */}
-      <Skeleton height={"auto"} isLoaded={isLoaded} fadeDuration={1}>
-        <Comments initialComments={comments} shelterId={shelterId} />
-      </Skeleton>
+      {
+        isLoaded && shelterId !== undefined ? (
+
+          <Comments initialComments={comments} shelterId={shelterId} />
+        ) : (
+          <Skeleton height={"400px"} fadeDuration={1} />
+        )
+      }
     </div >
   );
 }
