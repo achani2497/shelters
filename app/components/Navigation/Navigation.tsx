@@ -54,7 +54,7 @@ export function Navigation() {
     return (
         <>
             <Box className='bg-purple-500 text-white' height={'fit-content'} px={{ base: '2rem', md: '10%' }} boxShadow={'lg'} position={'fixed'} top={'0'} zIndex={'99'} width={'full'}>
-                <Flex h={'fit-content'} alignItems={'center'} justifyContent={'space-between'} alignContent={'flex-start'} width={'100%'} position={'relative'}>
+                <Flex h={'fit-content'} alignItems={'center'} justifyContent={'space-between'} alignContent={'center'} width={'100%'} minHeight={'4rem'} position={'relative'}>
 
                     <Box width={{ base: 100, md: 200 }} height={{ base: 50, md: 50 }} position={'relative'}>
                         <Link href='/'>
@@ -78,21 +78,22 @@ export function Navigation() {
                         size={'2xl'}
                         fontSize='25px'
                         color={'white'}
+                        zIndex={99}
                     />
 
                     {/* Menú de navegación */}
-                    <Drawer isOpen={isOpen} placement={'right'} onClose={onClose} size={'full'} colorScheme='purple'>
+                    <Drawer isOpen={isOpen} placement={'right'} onClose={onClose} size={'full'}>
                         <DrawerOverlay />
                         <DrawerContent className='bg-purple-500' color={'white'}>
-                            <DrawerCloseButton fontSize={'20px'} />
-                            <DrawerBody>
+                            <DrawerBody display={'flex'} alignItems={'flex-end'}>
                                 {/* Contenido del menú */}
-                                <Flex flexDirection={'column'}>
+                                <Flex flexDirection={'column'} width={'100%'}>
                                     {links.map((link) => (
                                         <NavLink key={link.label} url={link.route} label={link.label}></NavLink>
                                     ))}
                                 </Flex>
                             </DrawerBody>
+                            <DrawerCloseButton fontSize={'20px'} />
                         </DrawerContent>
                     </Drawer>
                 </Flex>

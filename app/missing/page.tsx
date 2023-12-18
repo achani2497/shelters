@@ -128,10 +128,9 @@ export default function Page() {
 
     return (
         <>
-            <Flex alignItems={'center'} justifyContent={'space-between'} w={'full'}>
+            <Flex alignItems={'center'} justifyContent={'space-between'} flexDirection={{ base: 'column', md: 'row' }} gap={'1rem'} w={'full'}>
                 <PageTitle title="Estos amiguitos estan perdidos" />
                 <SheltieButton fitContent alignMiddle={false} label={'Reportar perro perdido'} action={reportMissingModal.onOpen} />
-
             </Flex>
             <InputGroup my={'1rem'}>
                 <InputLeftElement pointerEvents='none'>
