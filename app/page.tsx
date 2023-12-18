@@ -23,20 +23,19 @@ export default function Home() {
     }, [finishedFetching, adoptedFinishedFetching])
     return (
         <main>
-            <Flex flexDirection={'column'} gap={'8rem'}>
+            <Flex flexDirection={'column'} gap={{ base: '4rem', md: '8rem' }}>
                 {/* Primera parte de la home page */}
-                <Box width={'100%'} position={'relative'} height={'90vh'} rounded={'2xl'} overflow={'hidden'}>
+                <Box width={'100%'} position={'relative'} height={{ base: '400px', md: '90vh' }} rounded={'2xl'} overflow={'hidden'}>
                     <Image src={'/images/3.jpg'} className='landingContainer' fill alt='dog image' priority />
-                    <Flex padding={'4rem'} flexDirection={'column'} justifyContent={'flex-end'} position={'absolute'} width={'100%'} bottom={0} height={'50%'} gap={'1rem'} className='slideText'>
-                        {/* <Text fontSize={'6xl'} fontWeight={'bold'}>Sheltie</Text> */}
-                        <Box width={200} height={100} position={'relative'}>
+                    <Flex padding={{ base: '1rem', md: '4rem' }} flexDirection={'column'} justifyContent={'flex-end'} position={'absolute'} width={'100%'} bottom={0} height={'fit-content'} gap={'1rem'} className='slideText'>
+                        <Box width={{ base: 100, md: 200 }} height={{ base: 50, md: 100 }} position={'relative'}>
                             <Image src={'/logo-black.svg'} alt='sheltie logo' fill style={{ objectFit: 'cover', scale: '2' }} />
                         </Box>
-                        <Text fontSize={'3xl'} fontWeight={'bold'}>Cambia dos vidas con una sola adopción. ¡Sé parte de esta hermosa historia!</Text>
+                        <Text fontSize={{ base: 'lg', md: '3xl' }} fontWeight={'bold'}>Cambia dos vidas con una sola adopción. ¡Sé parte de esta hermosa historia!</Text>
                     </Flex>
                 </Box>
                 <Flex gap={'1rem'} flexDirection={'column'}>
-                    <Text fontSize={'3xl'} fontWeight={'bold'}>Explora nuestros refugios</Text>
+                    <Text fontSize={'3xl'} fontWeight={'bold'} textAlign={{ base: 'center', md: 'left' }}>Explora nuestros refugios</Text>
                     {isLoaded ? (
                         <Flex flexDirection={'column'} gap={'3rem'}>
                             <Flex gap={'1rem'} justifyContent={'space-around'} w={'100%'} wrap={'wrap'}>
@@ -53,11 +52,11 @@ export default function Home() {
                     ) : (<Skeleton height={'400px'} />)}
                 </Flex>
                 <Flex gap={'1rem'} flexDirection={'column'}>
-                    <Text fontSize={'3xl'} fontWeight={'bold'}>Estos son algunos de nuestros amiguitos adoptados</Text>
+                    <Text fontSize={'3xl'} fontWeight={'bold'} textAlign={{ base: 'center', md: 'left' }}>Estos son algunos de nuestros amiguitos adoptados</Text>
                     {isLoaded ? <Carousel dogs={adoptedDogs} /> : <Skeleton height={'400px'} />}
                 </Flex>
                 <Flex id='voluntario' alignItems={'center'} flexDirection={'column'} gap={'1rem'}>
-                    <Text fontSize={'3xl'} fontWeight={'bold'}>Sumate como voluntario!</Text>
+                    <Text fontSize={'3xl'} fontWeight={'bold'} textAlign={{ base: 'center', md: 'left' }}>Sumate como voluntario!</Text>
                     <VolunteerForm shelters={shelters} />
                 </Flex>
             </Flex>

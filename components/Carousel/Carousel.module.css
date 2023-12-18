@@ -47,3 +47,14 @@
   .slideText{
     background: linear-gradient(to top, rgba(255,255,255,.9) 0%, rgba(255, 255, 255, .2) 80%, rgba(255,255,255,0) 100%);
   }
+
+@media screen and (max-width:500px) {
+  .slider::before, .slider::after{
+    background: unset;
+  }
+  .slideTrack{
+    -webkit-animation: scroll 60s linear infinite;
+          animation: scroll 60s linear infinite;
+  width: calc(500px * 10);
+  }
+}

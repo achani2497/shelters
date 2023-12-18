@@ -41,7 +41,7 @@ Ultimos detalles
 
 Urgente
 [ ] Fixear el comportamiento de las cards de /shelters/[id]
-[ ] Cambiar las fotos de los refugios en /shelters
+[x] Cambiar las fotos de los refugios en /shelters
 [x] Crear un logo para poner en el nav y como favicon
 
 ## Deploy on Vercel

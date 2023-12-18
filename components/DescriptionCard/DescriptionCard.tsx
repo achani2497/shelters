@@ -21,14 +21,15 @@ export function DescriptionCard({ photoUrl, title, description, buttonText, butt
                 boxShadow={'xl'}
                 padding={4}
                 marginBottom={8}
+                flexDirection={{ base: 'column', md: 'row' }}
             >
-                <Flex w={'300px'} position={'relative'} rounded={'xl'} overflow={'hidden'}>
+                <Flex w={{ base: '100%', md: '300px' }} height={{ base: '200px', md: '300px' }} position={'relative'} rounded={'xl'} overflow={'hidden'}>
                     <Image
                         src={photoUrl}
-                        width={300}
-                        height={300}
+                        fill
                         alt="Shelter image"
                         priority
+                        style={{ objectFit: 'contain' }}
                     />
                 </Flex>
                 <Flex

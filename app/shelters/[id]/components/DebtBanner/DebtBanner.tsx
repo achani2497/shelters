@@ -69,8 +69,8 @@ export function DebtBanner({ initialDebt, shelterId }: { initialDebt: number, sh
             {
                 debt > 0 ? (
                     <Box w='full' position={'absolute'} display={'flex'} flexDirection={'column'} gap={'.5rem'} top={'4rem'} left={0} backgroundColor={'rgba(255, 0, 0, .7)'} color={'white'} h={'fit-content'} padding={'1rem'} textAlign={'center'} alignItems={'center'}>
-                        <Heading as="h2" size="lg">Nuestra deuda asciende hasta los ${debtWithCommas()}</Heading>
-                        <Button fontSize={'lg'} onClick={onOpen} className={style.debtButton}>¡Ayudanos!</Button>
+                        <Heading as="h2" size={{ base: 'md', md: 'lg' }}>Nuestra deuda asciende hasta los ${debtWithCommas()}</Heading>
+                        <Button fontSize={{ base: 'md', md: 'lg' }} onClick={onOpen} className={style.debtButton}>¡Ayudanos!</Button>
                     </Box>
                 ) : null
             }
