@@ -57,7 +57,7 @@ export function Navigation() {
                 <Flex h={'fit-content'} alignItems={'center'} justifyContent={'space-between'} alignContent={'center'} width={'100%'} minHeight={'4rem'} position={'relative'}>
 
                     <Box width={{ base: 100, md: 200 }} height={{ base: 50, md: 50 }} position={'relative'}>
-                        <Link href='/'>
+                        <Link href='/' height={'100%'} width={'100%'}>
                             <Image src={'/logo.svg'} alt='sheltie logo' fill sizes="(max-width: 768px) 100vw, 33vw" style={{ objectFit: 'cover' }} />
                         </Link>
                     </Box>
@@ -65,7 +65,7 @@ export function Navigation() {
                     {/* MenuItems para pantallas que no sean celular */}
                     <Flex gap={'2rem'} display={{ base: 'none', md: 'flex' }}>
                         {links.map((link) => (
-                            <NavLink key={link.label} url={link.route} label={link.label}></NavLink>
+                            <NavLink key={link.label} url={link.route} label={link.label} />
                         ))}
                     </Flex>
 
@@ -88,8 +88,9 @@ export function Navigation() {
                             <DrawerBody display={'flex'} alignItems={'flex-end'}>
                                 {/* Contenido del menú */}
                                 <Flex flexDirection={'column'} width={'100%'}>
+                                    <NavLink url={'/'} label={'Home'} />
                                     {links.map((link) => (
-                                        <NavLink key={link.label} url={link.route} label={link.label}></NavLink>
+                                        <NavLink key={link.label} url={link.route} label={link.label} />
                                     ))}
                                 </Flex>
                             </DrawerBody>
