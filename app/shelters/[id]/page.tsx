@@ -89,7 +89,6 @@ export default function Page({ params }: any) {
       {/* Lista de comentarios y caja de comentarios */}
       {
         isLoaded && shelterId !== undefined ? (
-
           <Comments initialComments={comments} shelterId={shelterId} />
         ) : (
           <Skeleton height={"400px"} fadeDuration={1} />
